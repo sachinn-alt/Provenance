@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-semibold tracking-tight text-zinc-100 text-base">Provenance</span>
+              <h1 className="font-semibold tracking-tight text-zinc-100 text-base">Provenance</h1>
               <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Operational

@@ -1,0 +1,21 @@
+# Provenance — Autonomous Data Intelligence Platform
+
+> Provenance is an autonomous multi-stage DAG data collection and synthesis system. It deconstructs natural language business intents into formal typed schemas, crawls web targets compliant with robots.txt, normalizes entities, and maintains verifiable Citation Anchor lineage for every extracted attribute.
+
+## System Topology & Pipeline Stages
+1. **SchemaAgent**: Intent deconstruction, typed schema blueprint synthesis, and interactive Human-in-the-Loop refinement.
+2. **HarvesterAgent**: Compliant web discovery, robots.txt inspection, WAF sandbox routing, and rate limit enforcement.
+3. **SanitizerAgent**: DOM boilerplate stripping, script pruning, and conversion to high-density semantic Markdown chunks with visual fallback.
+4. **ExtractorAgent**: Schema-aligned entity extraction with Citation Anchor Protocol (binding verbatim source quotes & vector cosine alignment).
+5. **ResolverAgent**: Levenshtein fuzzy deduplication (>0.88), primary-key hashing, currency/date normalization, and multi-source lineage merging.
+6. **AuditAgent**: Dataset health index scoring, validity rate calculation, and export generation across 6 formats (Pandas, SQLite, CSV, JSON, Markdown, TSV).
+
+## API Endpoints
+- `GET /api/workflows`: List historical and active workflow executions.
+- `POST /api/workflows`: Initialize an autonomous workflow with a natural language business prompt, mode (`demo` | `live`), and optional user-refined schema.
+- `GET /api/workflows/:id`: Retrieve single workflow run state, canonical records, and provenance index.
+- `GET /api/workflows/:id/stream`: Real-time Server-Sent Events (SSE) telemetry stream emitting `step_update`, `schema_generated`, `log`, `workflow_completed`, and `workflow_failed` events.
+
+## Production Host
+- Production URL: https://provenance-zeta.vercel.app
+- Source Code: https://github.com/sachinn-alt/Provenance
