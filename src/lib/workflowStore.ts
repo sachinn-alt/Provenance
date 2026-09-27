@@ -59,33 +59,36 @@ export function getInitialSteps(): ExecutionStep[] {
   ];
 }
 
+export function getInitialSeedWorkflow(): WorkflowRun {
+  const startupData = PRESET_DATASETS['ai-startups'];
+  const { cleanedRecords, summary } = normalizeAndDeduplicate(startupData.records, startupData.schema, 3120);
+
+  return {
+    id: 'wf-seed-ai-startups',
+    createdAt: new Date(Date.now() - 3600000).toISOString(),
+    updatedAt: new Date(Date.now() - 3500000).toISOString(),
+    status: 'completed',
+    prompt: 'Collect top 10 early-stage AI agent startups with founders, funding amount, headquarters, core tech stack, and careers link.',
+    mode: 'demo',
+    schema: startupData.schema,
+    steps: getInitialSteps().map(s => ({ ...s, status: 'completed' as const })),
+    records: cleanedRecords,
+    logs: [
+      { id: 'l1', timestamp: new Date(Date.now() - 3590000).toISOString(), level: 'info', phase: 'intent', message: 'Deconstructed prompt into AIAgentStartup schema with 6 typed attributes.' },
+      { id: 'l2', timestamp: new Date(Date.now() - 3570000).toISOString(), level: 'info', phase: 'discovery', message: 'Discovered 4 authoritative source domains: techcrunch.com, venturebeat.com, ycombinator.com, bloomberg.com.' },
+      { id: 'l3', timestamp: new Date(Date.now() - 3550000).toISOString(), level: 'info', phase: 'crawl', message: 'Harvested 5 document pages. Pruned 78,000 DOM elements into 6.2KB clean semantic markdown.' },
+      { id: 'l4', timestamp: new Date(Date.now() - 3530000).toISOString(), level: 'success', phase: 'extract', message: 'Extracted 6 entities with 100% Citation Anchor Protocol compliance.' },
+      { id: 'l5', timestamp: new Date(Date.now() - 3510000).toISOString(), level: 'warn', phase: 'validate', message: 'Detected duplicate candidate: "Devin Technologies" matches primary key of "Cognition AI". Flagged and linked.' },
+      { id: 'l6', timestamp: new Date(Date.now() - 3500000).toISOString(), level: 'success', phase: 'export', message: 'Workflow completed. 5 canonical records published with 97% health index.' }
+    ],
+    summary
+  };
+}
+
 // Seed initial historical run
 function seedInitialWorkflows() {
   if (workflowsMap.size === 0) {
-    const startupData = PRESET_DATASETS['ai-startups'];
-    const { cleanedRecords, summary } = normalizeAndDeduplicate(startupData.records, startupData.schema, 3120);
-
-    const initialWorkflow: WorkflowRun = {
-      id: 'wf-seed-ai-startups',
-      createdAt: new Date(Date.now() - 3600000).toISOString(),
-      updatedAt: new Date(Date.now() - 3500000).toISOString(),
-      status: 'completed',
-      prompt: 'Collect top 10 early-stage AI agent startups with founders, funding amount, headquarters, core tech stack, and careers link.',
-      mode: 'demo',
-      schema: startupData.schema,
-      steps: getInitialSteps().map(s => ({ ...s, status: 'completed' as const })),
-      records: cleanedRecords,
-      logs: [
-        { id: 'l1', timestamp: new Date(Date.now() - 3590000).toISOString(), level: 'info', phase: 'intent', message: 'Deconstructed prompt into AIAgentStartup schema with 6 typed attributes.' },
-        { id: 'l2', timestamp: new Date(Date.now() - 3570000).toISOString(), level: 'info', phase: 'discovery', message: 'Discovered 4 authoritative source domains: techcrunch.com, venturebeat.com, ycombinator.com, bloomberg.com.' },
-        { id: 'l3', timestamp: new Date(Date.now() - 3550000).toISOString(), level: 'info', phase: 'crawl', message: 'Harvested 5 document pages. Pruned 78,000 DOM elements into 6.2KB clean semantic markdown.' },
-        { id: 'l4', timestamp: new Date(Date.now() - 3530000).toISOString(), level: 'success', phase: 'extract', message: 'Extracted 6 entities with 100% Citation Anchor Protocol compliance.' },
-        { id: 'l5', timestamp: new Date(Date.now() - 3510000).toISOString(), level: 'warn', phase: 'validate', message: 'Detected duplicate candidate: "Devin Technologies" matches primary key of "Cognition AI". Flagged and linked.' },
-        { id: 'l6', timestamp: new Date(Date.now() - 3500000).toISOString(), level: 'success', phase: 'export', message: 'Workflow completed. 5 canonical records published with 97% health index.' }
-      ],
-      summary
-    };
-
+    const initialWorkflow = getInitialSeedWorkflow();
     workflowsMap.set(initialWorkflow.id, initialWorkflow);
   }
 }

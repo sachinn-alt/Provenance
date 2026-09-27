@@ -62,12 +62,14 @@ export async function GET(
           return;
         }
 
+        const stepDelay = (ms: number) => new Promise(r => setTimeout(r, workflow.mode === 'demo' ? Math.round(ms * 0.3) : ms));
+
         // ==========================================
         // STAGE 1: INTENT & SCHEMA PLANNING
         // ==========================================
         updateStep('intent', 'in_progress', 'Analyzing prompt semantic constraints...');
         addLog('info', 'intent', `Deconstructing business requirements: "${workflow.prompt}"`);
-        await new Promise(r => setTimeout(r, 600));
+        await stepDelay(500);
 
         const schema = await generateSchemaFromPrompt(workflow.prompt, workflow.mode);
         updateWorkflow(id, { schema });
@@ -80,7 +82,7 @@ export async function GET(
         // ==========================================
         updateStep('discovery', 'in_progress', 'Evaluating search queries & permitted domains...');
         addLog('info', 'discovery', `Formulating targeted queries: ${schema.searchStrategy.suggestedQueries.slice(0, 2).join(' | ')}`);
-        await new Promise(r => setTimeout(r, 700));
+        await stepDelay(500);
 
         const targetDomains = schema.searchStrategy.targetDomainHints;
         addLog('info', 'discovery', `Verifying crawler policies for: ${targetDomains.join(', ')}`);
@@ -96,7 +98,7 @@ export async function GET(
         
         addLog('info', 'crawl', `Establishing HTTP connection to: ${primaryUrl}`);
         const harvested = await harvestAndSanitizeSource(primaryUrl, workflow.mode);
-        await new Promise(r => setTimeout(r, 800));
+        await stepDelay(600);
 
         addLog('info', 'crawl', `Sanitized DOM: removed scripts, navigation, footers. Extracted ${harvested.characterCount} clean chars (~${harvested.tokenEstimate} tokens).`);
         updateStep('crawl', 'completed', `Crawled & sanitized ${targetDomains.length} document streams.`);
@@ -106,7 +108,7 @@ export async function GET(
         // ==========================================
         updateStep('extract', 'in_progress', 'Executing schema extraction & binding Citation Anchor Protocol...');
         addLog('info', 'extract', `Invoking reasoning extraction engine conforming to ${schema.entityName}...`);
-        await new Promise(r => setTimeout(r, 900));
+        await stepDelay(650);
 
         const rawRecords = await extractEntitiesFromDocument(
           harvested.markdownContent,
@@ -123,7 +125,7 @@ export async function GET(
         // STAGE 5: VALIDATE, NORMALIZE & DEDUPLICATE
         // ==========================================
         updateStep('validate', 'in_progress', 'Running field normalization, primary-key deduplication, and quality scoring...');
-        await new Promise(r => setTimeout(r, 700));
+        await stepDelay(500);
 
         const durationTotal = Date.now() - startTime;
         const { cleanedRecords, summary } = normalizeAndDeduplicate(rawRecords, schema, durationTotal);
@@ -140,7 +142,7 @@ export async function GET(
         // STAGE 6: EXPORT & PUBLISH
         // ==========================================
         updateStep('export', 'in_progress', 'Materializing dataset into workbench...');
-        await new Promise(r => setTimeout(r, 400));
+        await stepDelay(300);
         updateStep('export', 'completed', `Published to Data Workbench.`);
         addLog('success', 'export', `Workflow execution finished in ${(durationTotal / 1000).toFixed(2)}s.`);
 

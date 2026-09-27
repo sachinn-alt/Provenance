@@ -11,12 +11,15 @@ import { AnalyticsView } from '@/components/AnalyticsView';
 import { HistoryModal } from '@/components/HistoryModal';
 import { ExportModal } from '@/components/ExportModal';
 import { WorkflowRun, CellProvenance } from '@/types';
+import { getInitialSeedWorkflow } from '@/lib/workflowStore';
 import { Table, BarChart2, Sparkles, AlertCircle } from 'lucide-react';
+
+const defaultInitialWorkflow = getInitialSeedWorkflow();
 
 export default function Home() {
   const [mode, setMode] = useState<'live' | 'demo'>('demo');
-  const [activeWorkflow, setActiveWorkflow] = useState<WorkflowRun | null>(null);
-  const [historyWorkflows, setHistoryWorkflows] = useState<WorkflowRun[]>([]);
+  const [activeWorkflow, setActiveWorkflow] = useState<WorkflowRun | null>(defaultInitialWorkflow);
+  const [historyWorkflows, setHistoryWorkflows] = useState<WorkflowRun[]>([defaultInitialWorkflow]);
   const [isRunning, setIsRunning] = useState(false);
   const [activeTab, setActiveTab] = useState<'workbench' | 'analytics'>('workbench');
   
