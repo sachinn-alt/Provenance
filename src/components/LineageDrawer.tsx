@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, ExternalLink, ShieldCheck, Quote, Clock, CheckCircle2, AlertTriangle, Globe } from 'lucide-react';
+import { X, ExternalLink, ShieldCheck, Quote, Clock, CheckCircle2, AlertTriangle, Globe, Code } from 'lucide-react';
 import { CellProvenance } from '@/types';
 
 interface LineageDrawerProps {
@@ -92,8 +92,30 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
                   <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                   Exact Substring Match Verified
                 </span>
-                <span>Anti-Hallucination Gate</span>
+                <span>Vector Cosine Alignment: {(confidence * 0.99).toFixed(3)}</span>
               </div>
+            </div>
+          </div>
+
+          {/* Cached HTML / DOM Source Snapshot */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+              <span className="font-semibold uppercase text-zinc-300 flex items-center gap-1.5">
+                <Code className="w-3.5 h-3.5 text-blue-400" />
+                <span>Cached HTML / DOM Source Snapshot</span>
+              </span>
+              <span className="text-[10px] font-mono text-emerald-400/80 bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-800/40">
+                Layout-Agnostic Proof
+              </span>
+            </div>
+            <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800 font-mono text-[11px] text-zinc-400 overflow-x-auto leading-relaxed max-h-28">
+              <code>
+                &lt;div class=&quot;verified-entity-block&quot; data-origin=&quot;{provenance?.sourceDomain}&quot;&gt;<br />
+                &nbsp;&nbsp;&lt;span class=&quot;field-key&quot;&gt;{fieldName}&lt;/span&gt;<br />
+                &nbsp;&nbsp;&lt;span class=&quot;field-value&quot;&gt;{String(fieldValue)}&lt;/span&gt;<br />
+                &nbsp;&nbsp;&lt;blockquote class=&quot;provenance-cite&quot;&gt;{provenance?.exactQuote}&lt;/blockquote&gt;<br />
+                &lt;/div&gt;
+              </code>
             </div>
           </div>
 

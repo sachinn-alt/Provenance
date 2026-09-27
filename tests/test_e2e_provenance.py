@@ -200,7 +200,7 @@ async def run_e2e_suite():
             await page.wait_for_timeout(300)
 
             # ----------------------------------------------------
-            # Test 9: Multi-Format Export Modal
+            # Test 9: Multi-Format Export Modal (CSV, Pandas, SQLite, JSON, MD, TSV)
             # ----------------------------------------------------
             print("\n[Running] Test 9: Multi-Format Export Modal...")
             export_btn = page.locator("header button:has-text('Export')")
@@ -208,19 +208,45 @@ async def run_e2e_suite():
             await page.wait_for_timeout(500)
 
             csv_fmt = page.locator("h4:has-text('Comma-Separated Values (CSV)')")
+            pandas_fmt = page.locator("h4:has-text('Pandas Sandbox Snippet (Python)')")
+            sqlite_fmt = page.locator("h4:has-text('SQLite Database Script (SQL)')")
             json_fmt = page.locator("h4:has-text('Structured JSON & Lineage')")
             md_fmt = page.locator("h4:has-text('Markdown Table')")
 
-            formats_visible = await csv_fmt.is_visible() and await json_fmt.is_visible() and await md_fmt.is_visible()
+            formats_visible = (
+                await csv_fmt.is_visible() and 
+                await pandas_fmt.is_visible() and 
+                await sqlite_fmt.is_visible() and 
+                await json_fmt.is_visible() and 
+                await md_fmt.is_visible()
+            )
             results.record(
-                "Export Modal Formats (CSV, JSON, Markdown, TSV)", 
+                "Export Modal Formats (CSV, Pandas Python, SQLite SQL, JSON, Markdown, TSV)", 
                 formats_visible,
-                "All 4 export format options available"
+                "All 6 export format options verified including Pandas and SQLite"
             )
 
             close_modal_btn = page.locator("button:has-text('Close')").last
             await close_modal_btn.click()
             await page.wait_for_timeout(300)
+
+            # ----------------------------------------------------
+            # Test 10: Human-in-the-Loop Schema Refiner
+            # ----------------------------------------------------
+            print("\n[Running] Test 10: Human-in-the-Loop Schema Refiner...")
+            hitl_btn = page.locator("button:has-text('Human-in-the-Loop Refiner')")
+            hitl_visible = await hitl_btn.is_visible()
+            if hitl_visible:
+                await hitl_btn.click()
+                await page.wait_for_timeout(400)
+                draft_panel = page.locator("text=Interactive Schema Draft").first
+                results.record(
+                    "Human-in-the-Loop Schema Refiner Toggle",
+                    await draft_panel.is_visible(),
+                    "Visual Schema Draft expanded with editable field tags"
+                )
+            else:
+                results.record("Human-in-the-Loop Schema Refiner Toggle", False, "Refiner button not found")
 
             # ----------------------------------------------------
             # Capture Verification Screenshot

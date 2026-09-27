@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Provenance — Autonomous Data Intelligence Platform',
-  description: 'Prompt-driven web data collection, schema synthesis, and verifiable lineage platform. Problem Statement 01.',
+  description: 'Prompt-driven web data collection, schema synthesis, and verifiable lineage platform with autonomous agent pipelines.',
 };
 
 export default function RootLayout({

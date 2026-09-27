@@ -95,7 +95,11 @@ function seedInitialWorkflows() {
 
 seedInitialWorkflows();
 
-export function createWorkflow(prompt: string, mode: 'live' | 'demo' = 'demo'): WorkflowRun {
+export function createWorkflow(
+  prompt: string, 
+  mode: 'live' | 'demo' = 'demo', 
+  customSchema?: any
+): WorkflowRun {
   const id = `wf-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
   const now = new Date().toISOString();
 
@@ -106,13 +110,15 @@ export function createWorkflow(prompt: string, mode: 'live' | 'demo' = 'demo'): 
     status: 'running',
     prompt,
     mode,
-    schema: {
-      entityName: 'AnalyzingRequirement',
-      description: 'Deconstructing intent...',
-      primaryKeys: ['name'],
-      attributes: [],
-      searchStrategy: { suggestedQueries: [], targetDomainHints: [] }
-    },
+    schema: (customSchema && customSchema.attributes && customSchema.attributes.length > 0)
+      ? customSchema
+      : {
+          entityName: 'AnalyzingRequirement',
+          description: 'Deconstructing intent...',
+          primaryKeys: ['name'],
+          attributes: [],
+          searchStrategy: { suggestedQueries: [], targetDomainHints: [] }
+        },
     steps: getInitialSteps(),
     records: [],
     logs: [

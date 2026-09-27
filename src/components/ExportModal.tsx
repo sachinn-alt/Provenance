@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Download, Copy, Check, FileSpreadsheet, FileJson, FileText, CheckCircle2 } from 'lucide-react';
+import { X, Download, Copy, Check, FileSpreadsheet, FileJson, FileText, Code2, Database } from 'lucide-react';
 import { ExtractedRecord, GeneratedSchema } from '@/types';
-import { exportToCSV, exportToJSON, exportToMarkdownTable, exportToTSV } from '@/lib/exportUtils';
+import { exportToCSV, exportToJSON, exportToMarkdownTable, exportToTSV, exportToPandasPython, exportToSQLiteSQL } from '@/lib/exportUtils';
 
 interface ExportModalProps {
   isOpen: boolean;
@@ -51,6 +51,24 @@ export const ExportModal: React.FC<ExportModalProps> = ({
       icon: FileSpreadsheet,
       mime: 'text/csv;charset=utf-8;',
       getter: () => exportToCSV(records, schema)
+    },
+    {
+      id: 'pandas',
+      title: 'Pandas Sandbox Snippet (Python)',
+      desc: 'Ready-to-run Python code snippet for Jupyter Notebooks, Google Colab, and ML pipelines.',
+      ext: '.py',
+      icon: Code2,
+      mime: 'text/x-python',
+      getter: () => exportToPandasPython(records, schema)
+    },
+    {
+      id: 'sqlite',
+      title: 'SQLite Database Script (SQL)',
+      desc: 'Self-contained DDL table schema and INSERT statements ready for relational querying.',
+      ext: '.sql',
+      icon: Database,
+      mime: 'application/sql',
+      getter: () => exportToSQLiteSQL(records, schema)
     },
     {
       id: 'json',

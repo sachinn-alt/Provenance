@@ -10,7 +10,7 @@ import { LineageDrawer } from '@/components/LineageDrawer';
 import { AnalyticsView } from '@/components/AnalyticsView';
 import { HistoryModal } from '@/components/HistoryModal';
 import { ExportModal } from '@/components/ExportModal';
-import { WorkflowRun, CellProvenance } from '@/types';
+import { WorkflowRun, CellProvenance, GeneratedSchema } from '@/types';
 import { getInitialSeedWorkflow } from '@/lib/workflowStore';
 import { Table, BarChart2, Sparkles, AlertCircle } from 'lucide-react';
 
@@ -46,7 +46,7 @@ export default function Home() {
   }, []);
 
   // Execute workflow
-  const handleExecute = async (prompt: string) => {
+  const handleExecute = async (prompt: string, customSchema?: GeneratedSchema) => {
     if (isRunning) return;
     setIsRunning(true);
 
@@ -55,7 +55,11 @@ export default function Home() {
       const res = await fetch('/api/workflows', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, mode })
+        body: JSON.stringify({ 
+          prompt, 
+          mode, 
+          customSchema: customSchema || activeWorkflow?.schema 
+        })
       });
 
       if (!res.ok) {
@@ -152,6 +156,9 @@ export default function Home() {
             onExecute={handleExecute}
             isRunning={isRunning}
             currentSchema={activeWorkflow?.schema}
+            onUpdateSchema={(updatedSchema) => {
+              setActiveWorkflow((prev) => prev ? { ...prev, schema: updatedSchema } : null);
+            }}
           />
         </section>
 
