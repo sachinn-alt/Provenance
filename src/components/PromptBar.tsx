@@ -37,6 +37,22 @@ export const PromptBar: React.FC<PromptBarProps> = ({
   const [isRefining, setIsRefining] = useState(false);
   const [newFieldName, setNewFieldName] = useState('');
   const [newFieldType, setNewFieldType] = useState<AttributeType>('string');
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+
+  React.useEffect(() => {
+    const handleGlobalKey = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+      if (e.key === '/' || (e.key === 'k' && (e.metaKey || e.ctrlKey))) {
+        e.preventDefault();
+        textareaRef.current?.focus();
+        textareaRef.current?.select();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKey);
+    return () => window.removeEventListener('keydown', handleGlobalKey);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,14 +125,21 @@ export const PromptBar: React.FC<PromptBarProps> = ({
               <span>Human-in-the-Loop Refiner</span>
               <span className={`w-1.5 h-1.5 rounded-full ${isRefining ? 'bg-blue-400 animate-pulse' : 'bg-zinc-600'}`} />
             </button>
-            <span className="text-[11px] font-mono text-zinc-500 hidden sm:inline">
-              Press <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-400 text-[10px]">Enter ↵</kbd>
+            <span className="text-[11px] font-mono text-zinc-500 hidden sm:flex items-center gap-1.5">
+              <span>Press</span>
+              <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">[/]</kbd>
+              <span>or</span>
+              <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">⌘K</kbd>
+              <span>to focus •</span>
+              <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">Enter ↵</kbd>
+              <span>to execute</span>
             </span>
           </div>
         </div>
 
         <div className="relative flex items-center">
           <textarea
+            ref={textareaRef}
             value={promptText}
             onChange={(e) => setPromptText(e.target.value)}
             disabled={isRunning}

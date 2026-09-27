@@ -21,13 +21,26 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
   provenance,
   entityName
 }) => {
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const confidence = provenance?.confidence ?? 0.95;
   const confidencePercent = Math.round(confidence * 100);
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-sm flex justify-end transition-opacity">
+    <div 
+      className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-sm flex justify-end transition-opacity"
+      onClick={onClose}
+    >
       <div 
         className="w-full max-w-lg bg-zinc-950 border-l border-zinc-800 shadow-2xl flex flex-col h-full transform transition-transform animate-in slide-in-from-right duration-200"
         onClick={(e) => e.stopPropagation()}

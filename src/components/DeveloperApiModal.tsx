@@ -12,8 +12,6 @@ export const DeveloperApiModal: React.FC<DeveloperApiModalProps> = ({ isOpen, on
   const [activeTab, setActiveTab] = useState<'curl' | 'python' | 'node'>('curl');
   const [copied, setCopied] = useState(false);
 
-  if (!isOpen) return null;
-
   const curlCode = `# 1. Dispatch Autonomous Workflow
 curl -X POST https://provenance-zeta.vercel.app/api/workflows \\
   -H "Content-Type: application/json" \\
@@ -102,8 +100,23 @@ runAutonomousProvenance();`;
     setTimeout(() => setCopied(false), 2000);
   };
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
+    <div 
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150"
+      onClick={onClose}
+    >
       <div 
         className="w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-8"
         onClick={(e) => e.stopPropagation()}

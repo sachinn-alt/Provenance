@@ -141,13 +141,26 @@ const PHASE_ICONS: Record<ExecutionPhase, React.ElementType> = {
 };
 
 export const DagInspectorModal: React.FC<DagInspectorModalProps> = ({ step, onClose }) => {
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (step) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [step, onClose]);
+
   if (!step) return null;
 
   const spec = STAGE_SPECS[step.phase] || STAGE_SPECS.intent;
   const Icon = PHASE_ICONS[step.phase] || Sparkles;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
+    <div 
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150"
+      onClick={onClose}
+    >
       <div 
         className="w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-8"
         onClick={(e) => e.stopPropagation()}

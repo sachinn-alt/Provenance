@@ -264,10 +264,9 @@ async def run_e2e_suite():
                 "DAG node opened Agent Architecture & Policy Guardrails modal"
             )
 
-            close_dag_btn = page.locator("button:has-text('Close Inspector')").last
-            if await close_dag_btn.is_visible():
-                await close_dag_btn.click()
-                await page.wait_for_timeout(300)
+            # Dismiss DAG modal via Escape key (Command Center shortcut) or button
+            await page.keyboard.press("Escape")
+            await page.wait_for_timeout(400)
 
             # ----------------------------------------------------
             # Test 12: Developer REST API Modal
@@ -285,10 +284,9 @@ async def run_e2e_suite():
                 "Header API button opened cURL & Python SDK documentation"
             )
 
-            close_api_btn = page.locator("button:has-text('Close')").last
-            if await close_api_btn.is_visible():
-                await close_api_btn.click()
-                await page.wait_for_timeout(300)
+            # Dismiss API modal via Escape key
+            await page.keyboard.press("Escape")
+            await page.wait_for_timeout(300)
 
             # ----------------------------------------------------
             # Capture Verification Screenshot
