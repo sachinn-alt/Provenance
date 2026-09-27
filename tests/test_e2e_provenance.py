@@ -64,7 +64,7 @@ async def run_e2e_suite():
             brand_text = await page.locator("header").inner_text()
             results.record(
                 "Header Brand & Status Badges", 
-                "Provenance" in brand_text and "Operational" in brand_text, 
+                "provenance" in brand_text.lower() and "operational" in brand_text.lower(), 
                 "Verified Provenance brand & Operational status pill"
             )
 

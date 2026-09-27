@@ -137,8 +137,23 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090b] relative overflow-x-hidden bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(59,130,246,0.12),rgba(255,255,255,0))]">
+    <div className="min-h-screen flex flex-col bg-[#050505] relative overflow-x-hidden selection:bg-[#ff4400] selection:text-white">
       
+      {/* Ambient Hand-Drawn Caricature Watermark (Teenage Engineering Style) */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden opacity-[0.05] select-none"
+        aria-hidden="true"
+      >
+        <img 
+          src="/images/caricature_manual_etl.jpg" 
+          alt="" 
+          className="w-full max-w-5xl object-contain invert mix-blend-screen scale-110 filter contrast-200"
+        />
+      </div>
+
+      {/* Subtle Technical Grid Overlay */}
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:24px_24px] opacity-20 z-0" />
+
       {/* Header */}
       <Header
         mode={mode}
@@ -151,8 +166,20 @@ export default function Home() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5 relative z-10">
         
+        {/* Teenage Engineering Style Editorial Header Teaser */}
+        <div className="flex items-center justify-between px-3.5 py-1.5 rounded-lg border border-zinc-800/80 bg-zinc-950/80 text-xs font-mono">
+          <div className="flex items-center gap-2.5">
+            <span className="text-[#ff4400] font-bold">[SYS.PROVENANCE // 01]</span>
+            <span className="text-zinc-200 uppercase font-semibold tracking-wider">The Anti-Manual Data Engine</span>
+            <span className="text-zinc-500 hidden md:inline">• "Manual crawling is hell. Verifiable automation is truth."</span>
+          </div>
+          <div className="flex items-center gap-3 text-[11px] text-zinc-500 font-mono">
+            <span className="text-zinc-400">CITATIONS: 100% VERIFIED</span>
+          </div>
+        </div>
+
         {/* Natural Language Prompt Input Bar */}
         <section>
           <PromptBar
@@ -196,13 +223,13 @@ export default function Home() {
                   onClick={() => setActiveTab('workbench')}
                   className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium transition-all ${
                     activeTab === 'workbench'
-                      ? 'bg-zinc-800 text-zinc-100 shadow-sm'
+                      ? 'bg-zinc-800 text-white border border-zinc-700/80 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-300'
                   }`}
                 >
-                  <Table className="w-3.5 h-3.5 text-blue-400" />
+                  <Table className="w-3.5 h-3.5 text-[#ff4400]" />
                   <span>Data Workbench</span>
-                  <span className="px-1.5 py-0.2 rounded-full bg-zinc-900 text-zinc-400 text-[10px] border border-zinc-700/50">
+                  <span className="px-1.5 py-0.2 rounded bg-zinc-900 text-zinc-300 text-[10px] border border-zinc-700/50">
                     {activeWorkflow.records.length}
                   </span>
                 </button>
@@ -211,11 +238,11 @@ export default function Home() {
                   onClick={() => setActiveTab('analytics')}
                   className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium transition-all ${
                     activeTab === 'analytics'
-                      ? 'bg-zinc-800 text-zinc-100 shadow-sm'
+                      ? 'bg-zinc-800 text-white border border-zinc-700/80 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-300'
                   }`}
                 >
-                  <BarChart2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <BarChart2 className="w-3.5 h-3.5 text-[#ff4400]" />
                   <span>Dataset Health & Analytics</span>
                 </button>
               </div>

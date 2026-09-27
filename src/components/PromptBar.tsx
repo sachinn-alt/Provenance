@@ -117,8 +117,8 @@ export const PromptBar: React.FC<PromptBarProps> = ({
       <form onSubmit={handleSubmit} className="relative z-10">
         <div className="flex items-center justify-between mb-2">
           <label className="text-xs font-mono font-medium text-zinc-400 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>NATURAL LANGUAGE DATA SPECIFICATION</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#ff4400]" />
+            <span className="tracking-wider">NATURAL LANGUAGE DATA SPECIFICATION</span>
           </label>
           <div className="flex items-center gap-2">
             <button
@@ -126,19 +126,19 @@ export const PromptBar: React.FC<PromptBarProps> = ({
               onClick={() => setIsRefining(!isRefining)}
               className={`text-[11px] font-mono px-2 py-0.5 rounded border transition-colors flex items-center gap-1 ${
                 isRefining
-                  ? 'bg-blue-600/20 text-blue-400 border-blue-500/40'
+                  ? 'bg-[#ff4400]/15 text-[#ff4400] border-[#ff4400]/40'
                   : 'bg-zinc-800/80 text-zinc-400 border-zinc-700/60 hover:text-zinc-200'
               }`}
             >
-              <UserCheck className="w-3 h-3 text-blue-400" />
+              <UserCheck className="w-3 h-3 text-[#ff4400]" />
               <span>Human-in-the-Loop Refiner</span>
-              <span className={`w-1.5 h-1.5 rounded-full ${isRefining ? 'bg-blue-400 animate-pulse' : 'bg-zinc-600'}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${isRefining ? 'bg-[#ff4400] animate-pulse' : 'bg-zinc-600'}`} />
             </button>
           </div>
         </div>
 
         {/* Unified Command Box Container */}
-        <div className="relative bg-zinc-950/90 border border-zinc-700/80 focus-within:border-blue-500/80 focus-within:ring-1 focus-within:ring-blue-500/50 rounded-xl p-3 transition-all shadow-inner">
+        <div className="relative bg-zinc-950/90 border border-zinc-700/80 focus-within:border-[#ff4400]/80 focus-within:ring-1 focus-within:ring-[#ff4400]/50 rounded-xl p-3 transition-all shadow-inner">
           <textarea
             ref={textareaRef}
             value={promptText}
@@ -177,7 +177,7 @@ export const PromptBar: React.FC<PromptBarProps> = ({
               className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
                 isRunning
                   ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-500 active:scale-95 text-white shadow-lg shadow-blue-600/20'
+                  : 'bg-[#ff4400] hover:bg-[#ff5500] active:scale-95 text-white shadow-lg shadow-[#ff4400]/25'
               }`}
             >
               {isRunning ? (
@@ -207,7 +207,7 @@ export const PromptBar: React.FC<PromptBarProps> = ({
             disabled={isRunning}
             className="text-xs px-2.5 py-1 rounded-md bg-zinc-800/70 hover:bg-zinc-700/70 active:bg-zinc-800 text-zinc-300 border border-zinc-700/50 transition-colors disabled:opacity-50 flex items-center gap-1.5"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400/80" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400]" />
             <span>{preset.title}</span>
           </button>
         ))}
@@ -218,14 +218,14 @@ export const PromptBar: React.FC<PromptBarProps> = ({
         <div className="mt-3 pt-3 border-t border-zinc-800/60 relative z-10 space-y-2">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
-              <Layers className="w-3.5 h-3.5 text-emerald-400" />
+              <Layers className="w-3.5 h-3.5 text-zinc-300" />
               <span className="font-semibold text-zinc-200">{currentSchema.entityName}</span>
               <span className="text-zinc-500">({currentSchema.attributes.length} fields):</span>
             </div>
 
             {isRefining && (
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/20 text-blue-400 border border-blue-800/40 flex items-center gap-1">
-                <UserCheck className="w-3 h-3 text-blue-400" />
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#ff4400]/15 text-[#ff4400] border border-[#ff4400]/30 flex items-center gap-1">
+                <UserCheck className="w-3 h-3 text-[#ff4400]" />
                 Human Control Active — Click [×] to remove or add custom fields
               </span>
             )}
@@ -262,12 +262,12 @@ export const PromptBar: React.FC<PromptBarProps> = ({
                 value={newFieldName}
                 onChange={(e) => setNewFieldName(e.target.value)}
                 placeholder="New field name (e.g. employeeCount)..."
-                className="bg-zinc-950 border border-zinc-800 rounded px-2.5 py-1 text-zinc-200 placeholder:text-zinc-600 outline-none focus:border-blue-500 w-48 text-[11px]"
+                className="bg-zinc-950 border border-zinc-800 rounded px-2.5 py-1 text-zinc-200 placeholder:text-zinc-600 outline-none focus:border-[#ff4400] w-48 text-[11px]"
               />
               <select
                 value={newFieldType}
                 onChange={(e) => setNewFieldType(e.target.value as AttributeType)}
-                className="bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-zinc-300 text-[11px] outline-none"
+                className="bg-zinc-950 border border-zinc-800 rounded px-2 py-1 text-zinc-300 text-[11px] outline-none focus:border-[#ff4400]"
               >
                 <option value="string">string</option>
                 <option value="number">number</option>
@@ -279,7 +279,7 @@ export const PromptBar: React.FC<PromptBarProps> = ({
               <button
                 type="submit"
                 disabled={!newFieldName.trim()}
-                className="px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-medium flex items-center gap-1 disabled:opacity-50"
+                className="px-2.5 py-1 rounded bg-[#ff4400] hover:bg-[#ff5511] text-black text-[11px] font-bold flex items-center gap-1 disabled:opacity-40 transition-colors"
               >
                 <Plus className="w-3 h-3" />
                 <span>Add Attribute</span>

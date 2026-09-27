@@ -107,12 +107,12 @@ export const ExportModal: React.FC<ExportModalProps> = ({
       >
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/60">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#ff4400]/10 border border-[#ff4400]/30 flex items-center justify-center text-[#ff4400]">
               <Download className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-zinc-100">Export Verified Dataset</h3>
+              <h3 className="text-sm font-bold text-zinc-100 font-display uppercase tracking-wider">Export Verified Dataset</h3>
               <p className="text-[11px] font-mono text-zinc-500">
                 {records.length} records • {schema.entityName}
               </p>
@@ -154,12 +154,12 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                     className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors"
                     title="Copy to clipboard"
                   >
-                    {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    {isCopied ? <Check className="w-3.5 h-3.5 text-[#ff4400]" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
 
                   <button
                     onClick={() => downloadFile(fmt.getter(), `${entitySlug}-${Date.now()}${fmt.ext}`, fmt.mime)}
-                    className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 active:scale-95 text-white text-xs font-medium flex items-center gap-1.5 transition-all shadow-md shadow-blue-600/20"
+                    className="px-3 py-1.5 rounded-lg bg-[#ff4400] hover:bg-[#ff5511] active:scale-95 text-black text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-[#ff4400]/20"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>Download</span>

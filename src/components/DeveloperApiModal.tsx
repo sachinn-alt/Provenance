@@ -124,13 +124,13 @@ runAutonomousProvenance();`;
         {/* Header */}
         <div className="p-5 border-b border-zinc-800 bg-zinc-900/60 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan-600/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+            <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-700 text-[#ff4400] flex items-center justify-center">
               <Terminal className="w-5 h-5" />
             </div>
             <div>
               <h3 className="text-sm font-semibold text-zinc-100 flex items-center gap-2">
                 <span>Developer REST API & Headless Execution</span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-700">
                   v1.0 Live
                 </span>
               </h3>
@@ -155,8 +155,8 @@ runAutonomousProvenance();`;
               onClick={() => setActiveTab('curl')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all ${
                 activeTab === 'curl' 
-                  ? 'bg-zinc-800 text-cyan-400 shadow-sm' 
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-zinc-800 text-white border border-zinc-700 shadow-sm' 
+                  : 'text-zinc-500 hover:text-zinc-300'
               }`}
             >
               cURL CLI
@@ -165,8 +165,8 @@ runAutonomousProvenance();`;
               onClick={() => setActiveTab('python')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all ${
                 activeTab === 'python' 
-                  ? 'bg-zinc-800 text-cyan-400 shadow-sm' 
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-zinc-800 text-white border border-zinc-700 shadow-sm' 
+                  : 'text-zinc-500 hover:text-zinc-300'
               }`}
             >
               Python Client
@@ -175,8 +175,8 @@ runAutonomousProvenance();`;
               onClick={() => setActiveTab('node')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all ${
                 activeTab === 'node' 
-                  ? 'bg-zinc-800 text-cyan-400 shadow-sm' 
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-zinc-800 text-white border border-zinc-700 shadow-sm' 
+                  : 'text-zinc-500 hover:text-zinc-300'
               }`}
             >
               Node.js / TS
@@ -185,12 +185,16 @@ runAutonomousProvenance();`;
 
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-mono text-zinc-200 transition-colors"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-colors ${
+              copied
+                ? 'bg-[#ff4400] text-white'
+                : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200'
+            }`}
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-emerald-400">Copied</span>
+                <Check className="w-3.5 h-3.5" />
+                <span>Copied</span>
               </>
             ) : (
               <>
@@ -211,7 +215,7 @@ runAutonomousProvenance();`;
         {/* Footer */}
         <div className="p-4 border-t border-zinc-800 bg-zinc-900/50 flex items-center justify-between text-xs text-zinc-400 font-mono">
           <span className="flex items-center gap-1.5">
-            <Globe className="w-3.5 h-3.5 text-cyan-400" />
+            <Globe className="w-3.5 h-3.5 text-[#ff4400]" />
             Endpoints: <code className="text-zinc-300">POST /api/workflows</code> &bull; <code className="text-zinc-300">GET /api/workflows/:id/stream</code>
           </span>
           <button

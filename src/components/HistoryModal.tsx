@@ -29,12 +29,12 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
       >
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/60">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#ff4400]/10 border border-[#ff4400]/30 flex items-center justify-center text-[#ff4400]">
               <History className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-zinc-100">Workflow & Dataset History</h3>
+              <h3 className="text-sm font-bold text-zinc-100 font-display uppercase tracking-wider">Workflow & Dataset History</h3>
               <p className="text-[11px] font-mono text-zinc-500">
                 Explore, restore, or re-inspect previous intelligence runs
               </p>
@@ -74,17 +74,17 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
                   }}
                   className={`p-3.5 rounded-lg border transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
                     isActive
-                      ? 'bg-zinc-900 border-blue-500/60 shadow-md ring-1 ring-blue-500/20'
+                      ? 'bg-zinc-900 border-[#ff4400]/60 shadow-md ring-1 ring-[#ff4400]/20'
                       : 'bg-zinc-900/40 hover:bg-zinc-900/80 border-zinc-800'
                   }`}
                 >
                   <div className="space-y-1.5 flex-1 min-w-0">
                     <div className="flex items-center gap-2 text-xs">
-                      <span className="font-semibold text-zinc-200 truncate">
+                      <span className="font-semibold text-zinc-200 truncate font-display">
                         {wf.schema.entityName || 'Unstructured Dataset'}
                       </span>
                       {isActive && (
-                        <span className="px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-400 text-[10px] font-mono border border-blue-500/20">
+                        <span className="px-1.5 py-0.2 rounded bg-[#ff4400]/10 text-[#ff4400] text-[10px] font-mono border border-[#ff4400]/20">
                           Active
                         </span>
                       )}
@@ -94,14 +94,14 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
                       </span>
                     </div>
 
-                    <p className="text-xs text-zinc-400 line-clamp-1">
+                    <p className="text-xs text-zinc-400 line-clamp-1 font-mono">
                       "{wf.prompt}"
                     </p>
 
                     <div className="flex items-center gap-3 text-[11px] font-mono text-zinc-500 pt-1">
                       <span>{wf.records.length} records</span>
                       <span>•</span>
-                      <span className="text-emerald-400">{wf.summary.validRate}% valid</span>
+                      <span className="text-zinc-200 font-semibold">{wf.summary.validRate}% valid</span>
                       <span>•</span>
                       <span>{wf.summary.sourcesCount} sources</span>
                     </div>
@@ -109,7 +109,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
 
                   <div className="shrink-0 flex items-center gap-2">
                     <button
-                      className="px-3 py-1.5 rounded-md bg-zinc-800 hover:bg-blue-600 hover:text-white text-zinc-300 text-xs font-medium flex items-center gap-1.5 transition-colors"
+                      className="px-3 py-1.5 rounded-md bg-zinc-800 hover:bg-[#ff4400] hover:text-black text-zinc-300 text-xs font-bold flex items-center gap-1.5 transition-colors"
                     >
                       <span>Explore</span>
                       <ArrowRight className="w-3.5 h-3.5" />

@@ -127,7 +127,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search across extracted cells..."
-              className="bg-zinc-950 border border-zinc-800 focus:border-blue-500 rounded-lg pl-8 pr-3 py-1.5 text-xs text-zinc-200 placeholder:text-zinc-600 outline-none w-56 sm:w-64"
+              className="bg-zinc-950 border border-zinc-800 focus:border-[#ff4400] rounded-lg pl-8 pr-3 py-1.5 text-xs text-zinc-200 placeholder:text-zinc-600 outline-none w-56 sm:w-64 font-mono"
             />
           </div>
 
@@ -136,26 +136,26 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
             <button
               onClick={() => setFilterMode('all')}
               className={`px-2.5 py-1 rounded transition-colors ${
-                filterMode === 'all' ? 'bg-zinc-800 text-zinc-100 font-semibold' : 'text-zinc-400 hover:text-zinc-200'
+                filterMode === 'all' ? 'bg-zinc-800 text-white font-bold' : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
-              All ({records.length})
+              ALL ({records.length})
             </button>
             <button
               onClick={() => setFilterMode('verified')}
               className={`px-2.5 py-1 rounded transition-colors ${
-                filterMode === 'verified' ? 'bg-zinc-800 text-emerald-400 font-semibold' : 'text-zinc-400 hover:text-zinc-200'
+                filterMode === 'verified' ? 'bg-zinc-800 text-[#ff4400] font-bold' : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
-              Verified ({records.filter(r => !r.isDuplicate).length})
+              VERIFIED ({records.filter(r => !r.isDuplicate).length})
             </button>
             <button
               onClick={() => setFilterMode('duplicates')}
               className={`px-2.5 py-1 rounded transition-colors ${
-                filterMode === 'duplicates' ? 'bg-zinc-800 text-amber-400 font-semibold' : 'text-zinc-400 hover:text-zinc-200'
+                filterMode === 'duplicates' ? 'bg-zinc-800 text-zinc-200 font-bold' : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
-              Duplicates ({records.filter(r => r.isDuplicate).length})
+              RECONCILED ({records.filter(r => r.isDuplicate).length})
             </button>
           </div>
         </div>
@@ -167,10 +167,10 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
           <div className="relative">
             <button
               onClick={() => setShowColDropdown(!showColDropdown)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 text-zinc-300 text-xs font-medium"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 text-zinc-300 text-xs font-mono font-medium"
             >
               <SlidersHorizontal className="w-3.5 h-3.5 text-zinc-400" />
-              <span>Columns ({activeAttributes.length})</span>
+              <span>COLUMNS ({activeAttributes.length})</span>
             </button>
 
             {showColDropdown && (
@@ -184,7 +184,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                       type="checkbox"
                       checked={visibleColumns[attr.name] !== false}
                       onChange={() => toggleColumn(attr.name)}
-                      className="rounded border-zinc-700 bg-zinc-950 text-blue-500"
+                      className="rounded border-zinc-700 bg-zinc-950 text-[#ff4400] focus:ring-[#ff4400]"
                     />
                     <span className="truncate">{attr.name}</span>
                   </label>
@@ -198,7 +198,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
             <button
               onClick={() => setViewMode('table')}
               className={`p-1.5 rounded transition-colors ${
-                viewMode === 'table' ? 'bg-zinc-800 text-blue-400' : 'text-zinc-500 hover:text-zinc-300'
+                viewMode === 'table' ? 'bg-zinc-800 text-[#ff4400]' : 'text-zinc-500 hover:text-zinc-300'
               }`}
               title="Table View"
             >
@@ -207,7 +207,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
             <button
               onClick={() => setViewMode('json')}
               className={`p-1.5 rounded transition-colors ${
-                viewMode === 'json' ? 'bg-zinc-800 text-blue-400' : 'text-zinc-500 hover:text-zinc-300'
+                viewMode === 'json' ? 'bg-zinc-800 text-[#ff4400]' : 'text-zinc-500 hover:text-zinc-300'
               }`}
               title="Raw JSON View"
             >
@@ -238,7 +238,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                 {activeAttributes.map(attr => (
                   <th 
                     key={attr.name} 
-                    className="py-2.5 px-3 font-semibold text-zinc-300 cursor-pointer select-none hover:text-blue-400"
+                    className="py-2.5 px-3 font-semibold text-zinc-300 cursor-pointer select-none hover:text-[#ff4400] transition-colors"
                     onClick={() => handleSort(attr.name)}
                   >
                     <div className="flex items-center gap-1.5">
@@ -260,7 +260,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                   <tr 
                     key={record.id}
                     className={`group transition-colors ${
-                      isDup ? 'bg-amber-950/10 hover:bg-amber-950/20' : 'hover:bg-zinc-900/60'
+                      isDup ? 'bg-zinc-900/40 hover:bg-zinc-900/80' : 'hover:bg-zinc-900/60'
                     }`}
                   >
                     {/* Index */}
@@ -276,15 +276,15 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                             const firstAttr = activeAttributes[0]?.name;
                             if (firstAttr) onInspectCell(firstAttr, record.data[firstAttr], record.provenance?.[firstAttr]);
                           }}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 cursor-pointer transition-colors"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 cursor-pointer transition-colors"
                           title="Fuzzy matched via Levenshtein distance (>0.88). Multi-source citations unified."
                         >
-                          <AlertTriangle className="w-3 h-3 text-amber-400" />
+                          <AlertTriangle className="w-3 h-3 text-[#ff4400]" />
                           <span>Reconciled Match</span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                          <CheckCircle2 className="w-3 h-3" />
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-white/5 text-zinc-200 border border-white/10">
+                          <CheckCircle2 className="w-3 h-3 text-[#ff4400]" />
                           {record.validationScore}% Valid
                         </span>
                       )}
@@ -311,7 +311,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1 font-mono text-[11px]"
+                                className="text-[#ff4400] hover:text-[#ff6622] hover:underline flex items-center gap-1 font-mono text-[11px]"
                               >
                                 <span>{String(value).replace(/^https?:\/\//, '').slice(0, 24)}...</span>
                                 <ExternalLink className="w-3 h-3" />
@@ -321,7 +321,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                                 {String(value ?? '-')}
                               </span>
                             ) : attr.type === 'currency' ? (
-                              <span className="font-mono text-emerald-400 font-medium">
+                              <span className="font-mono text-zinc-100 font-medium">
                                 {String(value ?? '-')}
                               </span>
                             ) : (
@@ -338,7 +338,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                                 className="p-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-200"
                                 title="Copy Value"
                               >
-                                {isCopied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                                {isCopied ? <Check className="w-3 h-3 text-[#ff4400]" /> : <Copy className="w-3 h-3" />}
                               </button>
                             </div>
                           </div>
@@ -353,7 +353,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                           const firstAttr = activeAttributes[0]?.name || 'name';
                           onInspectCell(firstAttr, record.data[firstAttr], record.provenance?.[firstAttr]);
                         }}
-                        className="inline-flex items-center gap-1 px-2 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-blue-400 border border-zinc-800 text-[11px] font-mono transition-colors"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-[#ff4400] hover:border-[#ff4400]/40 border border-zinc-800 text-[11px] font-mono transition-colors"
                       >
                         <Eye className="w-3 h-3" />
                         <span>Inspect</span>

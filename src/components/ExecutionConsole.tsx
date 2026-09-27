@@ -40,9 +40,9 @@ export const ExecutionConsole: React.FC<ExecutionConsoleProps> = ({
             {logs.length} events
           </span>
           {isRunning && (
-            <span className="flex items-center gap-1 text-[10px] font-mono text-cyan-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-              Live Telemetry
+            <span className="flex items-center gap-1.5 text-[10px] font-mono text-[#ff4400]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400] animate-ping" />
+              LIVE TELEMETRY
             </span>
           )}
         </div>
@@ -56,7 +56,7 @@ export const ExecutionConsole: React.FC<ExecutionConsoleProps> = ({
                 onClick={() => setFilterLevel(lvl)}
                 className={`px-2 py-0.5 rounded uppercase transition-colors ${
                   filterLevel === lvl
-                    ? 'bg-zinc-800 text-zinc-100 font-semibold'
+                    ? 'bg-zinc-800 text-[#ff4400] font-bold'
                     : 'text-zinc-500 hover:text-zinc-300'
                 }`}
               >
@@ -89,10 +89,10 @@ export const ExecutionConsole: React.FC<ExecutionConsoleProps> = ({
             filteredLogs.map(log => {
               const timeStr = new Date(log.timestamp).toLocaleTimeString([], { hour12: false });
               
-              let badgeColor = 'bg-blue-900/30 text-blue-400 border-blue-800/40';
-              if (log.level === 'success') badgeColor = 'bg-emerald-950/30 text-emerald-400 border-emerald-800/40';
-              if (log.level === 'warn') badgeColor = 'bg-amber-950/30 text-amber-400 border-amber-800/40';
-              if (log.level === 'error') badgeColor = 'bg-rose-950/30 text-rose-400 border-rose-800/40';
+              let badgeColor = 'bg-zinc-900 text-zinc-300 border-zinc-700';
+              if (log.level === 'success') badgeColor = 'bg-[#ff4400]/10 text-[#ff4400] border-[#ff4400]/30';
+              if (log.level === 'warn') badgeColor = 'bg-zinc-800 text-zinc-200 border-zinc-600';
+              if (log.level === 'error') badgeColor = 'bg-white text-black border-white font-bold';
 
               return (
                 <div key={log.id} className="flex items-start gap-2 leading-relaxed text-zinc-300 hover:bg-zinc-900/40 px-1 py-0.5 rounded transition-colors">

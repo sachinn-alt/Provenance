@@ -48,11 +48,11 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
         {/* Header */}
         <div className="p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/60">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded bg-blue-600/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <div className="w-7 h-7 rounded bg-zinc-900 border border-zinc-700 text-[#ff4400] flex items-center justify-center">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-zinc-100 flex items-center gap-1.5">
+              <h3 className="text-sm font-semibold text-zinc-100 flex items-center gap-1.5 font-mono">
                 <span>Citation & Lineage Inspector</span>
               </h3>
               <p className="text-[11px] font-mono text-zinc-500">
@@ -78,7 +78,7 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
               <span className="uppercase text-[10px] tracking-wider text-zinc-500">Entity Field</span>
               <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300">{entityName}</span>
             </div>
-            <div className="font-mono text-sm font-semibold text-blue-400">
+            <div className="font-mono text-sm font-semibold text-white">
               {fieldName}
             </div>
             <div className="mt-2 pt-2 border-t border-zinc-800/80">
@@ -92,20 +92,20 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
           {/* Verbatim Source Quote (The Core Proof) */}
           <div className="space-y-2">
             <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
-              <Quote className="w-3.5 h-3.5 text-emerald-400" />
+              <Quote className="w-3.5 h-3.5 text-[#ff4400]" />
               <span className="font-semibold uppercase text-zinc-300">Verbatim Citation Anchor</span>
             </div>
             
-            <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-4 relative">
-              <p className="text-xs text-emerald-200/90 leading-relaxed italic">
+            <div className="bg-zinc-900 border border-zinc-700/80 rounded-lg p-4 relative">
+              <p className="text-xs text-zinc-200 leading-relaxed italic">
                 "{provenance?.exactQuote || 'Extracted directly from structured table markup in official source.'}"
               </p>
-              <div className="mt-3 flex items-center justify-between text-[10px] font-mono text-emerald-400/80 pt-2 border-t border-emerald-900/40">
-                <span className="flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              <div className="mt-3 flex items-center justify-between text-[10px] font-mono text-zinc-400 pt-2 border-t border-zinc-800">
+                <span className="flex items-center gap-1 text-[#ff4400]">
+                  <CheckCircle2 className="w-3 h-3 text-[#ff4400]" />
                   Exact Substring Match Verified
                 </span>
-                <span>Vector Cosine Alignment: {(confidence * 0.99).toFixed(3)}</span>
+                <span>Vector Alignment: {(confidence * 0.99).toFixed(3)}</span>
               </div>
             </div>
           </div>
@@ -114,10 +114,10 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="font-semibold uppercase text-zinc-300 flex items-center gap-1.5">
-                <Code className="w-3.5 h-3.5 text-blue-400" />
+                <Code className="w-3.5 h-3.5 text-[#ff4400]" />
                 <span>Cached HTML / DOM Source Snapshot</span>
               </span>
-              <span className="text-[10px] font-mono text-emerald-400/80 bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-800/40">
+              <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 px-1.5 py-0.5 rounded border border-zinc-800">
                 Layout-Agnostic Proof
               </span>
             </div>
@@ -155,7 +155,7 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
                   href={provenance.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 flex items-center justify-between p-2 rounded bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 text-xs text-blue-400 hover:text-blue-300 transition-colors group"
+                  className="mt-2 flex items-center justify-between p-2 rounded bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 text-xs text-[#ff4400] hover:underline transition-colors group"
                 >
                   <span className="truncate max-w-[280px] font-mono text-[11px]">
                     {provenance.sourceUrl}
@@ -170,11 +170,11 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs font-mono">
               <span className="text-zinc-400 uppercase">Extraction Confidence</span>
-              <span className="text-emerald-400 font-bold">{confidencePercent}%</span>
+              <span className="text-[#ff4400] font-bold">{confidencePercent}%</span>
             </div>
             <div className="w-full h-2 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full transition-all duration-500"
+                className="h-full bg-[#ff4400] rounded-full transition-all duration-500"
                 style={{ width: `${confidencePercent}%` }}
               />
             </div>
