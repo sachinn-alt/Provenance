@@ -10,6 +10,7 @@ import { LineageDrawer } from '@/components/LineageDrawer';
 import { AnalyticsView } from '@/components/AnalyticsView';
 import { HistoryModal } from '@/components/HistoryModal';
 import { ExportModal } from '@/components/ExportModal';
+import { DeveloperApiModal } from '@/components/DeveloperApiModal';
 import { WorkflowRun, CellProvenance, GeneratedSchema } from '@/types';
 import { getInitialSeedWorkflow } from '@/lib/workflowStore';
 import { Table, BarChart2, Sparkles, AlertCircle } from 'lucide-react';
@@ -26,6 +27,7 @@ export default function Home() {
   // Modals & Drawers
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
+  const [showApiModal, setShowApiModal] = useState(false);
   const [inspectedCell, setInspectedCell] = useState<{
     fieldName: string;
     fieldValue: any;
@@ -135,7 +137,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090b]">
+    <div className="min-h-screen flex flex-col bg-[#09090b] relative overflow-x-hidden bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(59,130,246,0.12),rgba(255,255,255,0))]">
       
       {/* Header */}
       <Header
@@ -143,6 +145,7 @@ export default function Home() {
         onToggleMode={setMode}
         onOpenHistory={() => setShowHistoryModal(true)}
         onOpenExport={() => setShowExportModal(true)}
+        onOpenApi={() => setShowApiModal(true)}
         historyCount={historyWorkflows.length}
         hasRecords={Boolean(activeWorkflow && activeWorkflow.records.length > 0)}
       />
@@ -273,6 +276,12 @@ export default function Home() {
           schema={activeWorkflow.schema}
         />
       )}
+
+      {/* Developer REST API Modal */}
+      <DeveloperApiModal
+        isOpen={showApiModal}
+        onClose={() => setShowApiModal(false)}
+      />
 
     </div>
   );

@@ -271,9 +271,16 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
                     {/* Status Pill */}
                     <td className="py-2.5 px-3 whitespace-nowrap">
                       {isDup ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                          <AlertTriangle className="w-3 h-3" />
-                          Duplicate
+                        <span 
+                          onClick={() => {
+                            const firstAttr = activeAttributes[0]?.name;
+                            if (firstAttr) onInspectCell(firstAttr, record.data[firstAttr], record.provenance?.[firstAttr]);
+                          }}
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 cursor-pointer transition-colors"
+                          title="Fuzzy matched via Levenshtein distance (>0.88). Multi-source citations unified."
+                        >
+                          <AlertTriangle className="w-3 h-3 text-amber-400" />
+                          <span>Reconciled Match</span>
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">

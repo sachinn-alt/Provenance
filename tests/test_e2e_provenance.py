@@ -239,7 +239,7 @@ async def run_e2e_suite():
             if hitl_visible:
                 await hitl_btn.click()
                 await page.wait_for_timeout(400)
-                draft_panel = page.locator("text=Interactive Schema Draft").first
+                draft_panel = page.locator("text=Human Control Active").first
                 results.record(
                     "Human-in-the-Loop Schema Refiner Toggle",
                     await draft_panel.is_visible(),
@@ -247,6 +247,48 @@ async def run_e2e_suite():
                 )
             else:
                 results.record("Human-in-the-Loop Schema Refiner Toggle", False, "Refiner button not found")
+
+            # ----------------------------------------------------
+            # Test 11: Interactive DAG Node Architecture Inspector
+            # ----------------------------------------------------
+            print("\n[Running] Test 11: Interactive DAG Node Architecture Inspector...")
+            dag_stage_btn = page.locator("div[title*='inspect Agent Architecture']").first
+            await dag_stage_btn.click()
+            await page.wait_for_timeout(400)
+
+            dag_modal = page.locator("text=Deterministic Policy Guardrails").first
+            dag_modal_visible = await dag_modal.is_visible()
+            results.record(
+                "Interactive DAG Stage Architecture Inspector",
+                dag_modal_visible,
+                "DAG node opened Agent Architecture & Policy Guardrails modal"
+            )
+
+            close_dag_btn = page.locator("button:has-text('Close Inspector')").last
+            if await close_dag_btn.is_visible():
+                await close_dag_btn.click()
+                await page.wait_for_timeout(300)
+
+            # ----------------------------------------------------
+            # Test 12: Developer REST API Modal
+            # ----------------------------------------------------
+            print("\n[Running] Test 12: Developer REST API Modal...")
+            api_btn = page.locator("header button:has-text('API')")
+            await api_btn.click()
+            await page.wait_for_timeout(400)
+
+            api_modal = page.locator("text=Developer REST API & Headless Execution").first
+            api_modal_visible = await api_modal.is_visible()
+            results.record(
+                "Developer REST API & Headless Execution Modal",
+                api_modal_visible,
+                "Header API button opened cURL & Python SDK documentation"
+            )
+
+            close_api_btn = page.locator("button:has-text('Close')").last
+            if await close_api_btn.is_visible():
+                await close_api_btn.click()
+                await page.wait_for_timeout(300)
 
             # ----------------------------------------------------
             # Capture Verification Screenshot

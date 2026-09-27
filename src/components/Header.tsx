@@ -8,6 +8,7 @@ interface HeaderProps {
   onToggleMode: (mode: 'live' | 'demo') => void;
   onOpenHistory: () => void;
   onOpenExport: () => void;
+  onOpenApi: () => void;
   historyCount: number;
   hasRecords: boolean;
 }
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleMode,
   onOpenHistory,
   onOpenExport,
+  onOpenApi,
   historyCount,
   hasRecords
 }) => {
@@ -84,6 +86,16 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="font-mono text-[10px] px-1.5 py-0.2 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700/60">
               {historyCount}
             </span>
+          </button>
+
+          {/* Developer API Docs Button */}
+          <button
+            onClick={onOpenApi}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 text-xs font-medium transition-all"
+            title="View cURL CLI, Python client, and REST API docs"
+          >
+            <Terminal className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">API</span>
           </button>
 
           {/* Export Button */}
