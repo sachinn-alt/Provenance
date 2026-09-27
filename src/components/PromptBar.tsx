@@ -54,6 +54,15 @@ export const PromptBar: React.FC<PromptBarProps> = ({
     return () => window.removeEventListener('keydown', handleGlobalKey);
   }, []);
 
+  // Auto-grow textarea height as content expands
+  React.useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      const scrollH = textareaRef.current.scrollHeight;
+      textareaRef.current.style.height = `${Math.min(Math.max(scrollH, 48), 240)}px`;
+    }
+  }, [promptText]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (promptText.trim() && !isRunning) {
@@ -125,19 +134,11 @@ export const PromptBar: React.FC<PromptBarProps> = ({
               <span>Human-in-the-Loop Refiner</span>
               <span className={`w-1.5 h-1.5 rounded-full ${isRefining ? 'bg-blue-400 animate-pulse' : 'bg-zinc-600'}`} />
             </button>
-            <span className="text-[11px] font-mono text-zinc-500 hidden sm:flex items-center gap-1.5">
-              <span>Press</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">[/]</kbd>
-              <span>or</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">⌘K</kbd>
-              <span>to focus •</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">Enter ↵</kbd>
-              <span>to execute</span>
-            </span>
           </div>
         </div>
 
-        <div className="relative flex items-center">
+        {/* Unified Command Box Container */}
+        <div className="relative bg-zinc-950/90 border border-zinc-700/80 focus-within:border-blue-500/80 focus-within:ring-1 focus-within:ring-blue-500/50 rounded-xl p-3 transition-all shadow-inner">
           <textarea
             ref={textareaRef}
             value={promptText}
@@ -145,7 +146,7 @@ export const PromptBar: React.FC<PromptBarProps> = ({
             disabled={isRunning}
             placeholder="Describe what data to collect, attributes needed, and target criteria in plain English..."
             rows={2}
-            className="w-full bg-zinc-950/90 border border-zinc-700/80 focus:border-blue-500/80 focus:ring-1 focus:ring-blue-500/50 rounded-lg p-3 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none resize-none transition-all disabled:opacity-60"
+            className="w-full bg-transparent border-0 outline-none resize-none text-sm text-zinc-100 placeholder:text-zinc-600 disabled:opacity-60 leading-relaxed font-sans block"
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -154,27 +155,44 @@ export const PromptBar: React.FC<PromptBarProps> = ({
             }}
           />
 
-          <button
-            type="submit"
-            disabled={isRunning || !promptText.trim()}
-            className={`absolute right-2.5 bottom-3 px-4 py-2 rounded-md text-xs font-semibold flex items-center gap-2 transition-all ${
-              isRunning
-                ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
-                : 'bg-blue-600 hover:bg-blue-500 active:scale-95 text-white shadow-lg shadow-blue-600/20'
-            }`}
-          >
-            {isRunning ? (
-              <>
-                <div className="w-3.5 h-3.5 border-2 border-zinc-400 border-t-transparent rounded-full animate-spin" />
-                <span>Orchestrating...</span>
-              </>
-            ) : (
-              <>
-                <span>Execute Workflow</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </>
-            )}
-          </button>
+          {/* Bottom Action & Telemetry Toolbar */}
+          <div className="flex items-center justify-between pt-2.5 mt-1 border-t border-zinc-800/70">
+            <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-500">
+              <span className="hidden sm:flex items-center gap-1.5">
+                <span>Press</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">[/]</kbd>
+                <span>or</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">⌘K</kbd>
+                <span>to focus •</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">Enter ↵</kbd>
+                <span>to execute •</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-zinc-850 border border-zinc-700 text-zinc-300 text-[10px] font-mono font-semibold">Shift+↵</kbd>
+                <span>new line</span>
+              </span>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isRunning || !promptText.trim()}
+              className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shrink-0 ${
+                isRunning
+                  ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-500 active:scale-95 text-white shadow-lg shadow-blue-600/20'
+              }`}
+            >
+              {isRunning ? (
+                <>
+                  <div className="w-3.5 h-3.5 border-2 border-zinc-400 border-t-transparent rounded-full animate-spin" />
+                  <span>Orchestrating...</span>
+                </>
+              ) : (
+                <>
+                  <span>Execute Workflow</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </form>
 

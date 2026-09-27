@@ -96,7 +96,7 @@ export const ExecutionConsole: React.FC<ExecutionConsoleProps> = ({
 
               return (
                 <div key={log.id} className="flex items-start gap-2 leading-relaxed text-zinc-300 hover:bg-zinc-900/40 px-1 py-0.5 rounded transition-colors">
-                  <span className="text-zinc-600 shrink-0 select-none">{timeStr}</span>
+                  <span className="text-zinc-600 shrink-0 select-none" suppressHydrationWarning>{timeStr}</span>
                   <span className={`text-[9px] uppercase px-1.5 py-0.2 rounded border font-semibold shrink-0 ${badgeColor}`}>
                     {log.phase}
                   </span>
