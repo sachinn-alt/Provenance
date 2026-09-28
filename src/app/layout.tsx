@@ -48,6 +48,15 @@ export const metadata: Metadata = {
     title: 'Provenance — Autonomous Data Intelligence Platform',
     description: 'Prompt-driven web data collection, schema synthesis, and verifiable lineage platform with autonomous agent pipelines.',
   },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   robots: {
     index: true,
     follow: true,
