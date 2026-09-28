@@ -77,7 +77,7 @@ export function sanitizeHtmlToMarkdown(html: string): { title: string; markdown:
 
   const title = $('title').text().trim() || $('h1').first().text().trim() || 'Document';
 
-  let markdownLines: string[] = [];
+  const markdownLines: string[] = [];
 
   $('h1, h2, h3, p, li, table, blockquote').each((_, el) => {
     const tagName = (el as any).tagName?.toLowerCase();

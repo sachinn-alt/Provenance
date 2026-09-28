@@ -66,7 +66,7 @@ export const DataWorkbench: React.FC<DataWorkbenchProps> = ({
 
   // Filter & Sort Pipeline
   const filteredRecords = useMemo(() => {
-    let result = records.filter(record => {
+    const result = records.filter(record => {
       // 1. Status Filter
       if (filterMode === 'verified' && record.isDuplicate) return false;
       if (filterMode === 'duplicates' && !record.isDuplicate) return false;

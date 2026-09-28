@@ -19,7 +19,7 @@ export function normalizeAndDeduplicate(
     // 1. Attribute Normalization
     for (const attr of schema.attributes) {
       totalFieldsCount++;
-      let val = cleanedData[attr.name];
+      const val = cleanedData[attr.name];
 
       if (val !== undefined && val !== null && String(val).trim() !== '') {
         validFieldsCount++;

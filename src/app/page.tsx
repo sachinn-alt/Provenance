@@ -173,7 +173,7 @@ export default function Home() {
           <div className="flex items-center gap-2.5">
             <span className="text-[#ff4400] font-bold">[SYS.PROVENANCE // 01]</span>
             <span className="text-zinc-200 uppercase font-semibold tracking-wider">The Anti-Manual Data Engine</span>
-            <span className="text-zinc-500 hidden md:inline">• "Manual crawling is hell. Verifiable automation is truth."</span>
+            <span className="text-zinc-500 hidden md:inline">• &ldquo;Manual crawling is hell. Verifiable automation is truth.&rdquo;</span>
           </div>
           <div className="flex items-center gap-3 text-[11px] text-zinc-500 font-mono">
             <span className="text-zinc-400">CITATIONS: 100% VERIFIED</span>

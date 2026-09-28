@@ -95,7 +95,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
                     </div>
 
                     <p className="text-xs text-zinc-400 line-clamp-1 font-mono">
-                      "{wf.prompt}"
+                      &ldquo;{wf.prompt}&rdquo;
                     </p>
 
                     <div className="flex items-center gap-3 text-[11px] font-mono text-zinc-500 pt-1">

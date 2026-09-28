@@ -8,7 +8,7 @@ interface LineageDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   fieldName: string;
-  fieldValue: any;
+  fieldValue: unknown;
   provenance?: CellProvenance;
   entityName: string;
 }
@@ -30,6 +30,15 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
     }
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
+
+  const auditId = React.useMemo(() => {
+    const raw = `${fieldName}-${provenance?.extractedAt || 'seed'}`;
+    let hash = 0;
+    for (let i = 0; i < raw.length; i++) {
+      hash = (hash * 31 + raw.charCodeAt(i)) >>> 0;
+    }
+    return hash.toString(16).toUpperCase().padStart(6, '0').slice(-6);
+  }, [fieldName, provenance?.extractedAt]);
 
   if (!isOpen) return null;
 
@@ -98,7 +107,7 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
             
             <div className="bg-zinc-900 border border-zinc-700/80 rounded-lg p-4 relative">
               <p className="text-xs text-zinc-200 leading-relaxed italic">
-                "{provenance?.exactQuote || 'Extracted directly from structured table markup in official source.'}"
+                &ldquo;{provenance?.exactQuote || 'Extracted directly from structured table markup in official source.'}&rdquo;
               </p>
               <div className="mt-3 flex items-center justify-between text-[10px] font-mono text-zinc-400 pt-2 border-t border-zinc-800">
                 <span className="flex items-center gap-1 text-[#ff4400]">
@@ -189,7 +198,7 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
               <Clock className="w-3 h-3" />
               Extracted: {provenance?.extractedAt ? new Date(provenance.extractedAt).toLocaleString() : 'Just now'}
             </span>
-            <span className="text-zinc-600">Audit ID: {Math.random().toString(36).substring(2, 8).toUpperCase()}</span>
+            <span className="text-zinc-600">Audit ID: {auditId}</span>
           </div>
 
         </div>
