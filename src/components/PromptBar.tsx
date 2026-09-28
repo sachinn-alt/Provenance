@@ -2,17 +2,14 @@
 
 import React, { useState } from 'react';
 import { 
-  Search, 
   Sparkles, 
-  ArrowRight, 
   Layers, 
-  Sliders, 
   Plus, 
   X, 
-  UserCheck, 
-  ShieldCheck, 
-  HelpCircle 
+  UserCheck 
 } from 'lucide-react';
+import { MorphIcon } from 'morphicons/react';
+import { ArrowRight as ArrowRightData, Loader2 as Loader2Data } from 'lucide';
 import { PROMPT_PRESETS } from '@/lib/sampleData';
 import { GeneratedSchema, PromptPreset, SchemaAttribute, AttributeType } from '@/types';
 
@@ -180,17 +177,13 @@ export const PromptBar: React.FC<PromptBarProps> = ({
                   : 'bg-[#ff4400] hover:bg-[#ff5500] hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#ff4400]/30 active:translate-y-0 active:scale-95 text-white shadow-lg shadow-[#ff4400]/25'
               }`}
             >
-              {isRunning ? (
-                <>
-                  <div className="w-3.5 h-3.5 border-2 border-zinc-400 border-t-transparent rounded-full animate-spin" />
-                  <span>Orchestrating...</span>
-                </>
-              ) : (
-                <>
-                  <span>Execute Workflow</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
-                </>
-              )}
+              <MorphIcon 
+                icon={isRunning ? Loader2Data : ArrowRightData} 
+                size={14} 
+                spring="snappy" 
+                className={isRunning ? "animate-spin text-zinc-400" : "text-white group-hover:translate-x-0.5 transition-transform duration-150"} 
+              />
+              <span>{isRunning ? 'Orchestrating...' : 'Execute Workflow'}</span>
             </button>
           </div>
         </div>

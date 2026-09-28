@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
-import { ShieldCheck, Globe, History, Download, Terminal, Cpu } from 'lucide-react';
+import { History, Download, Terminal } from 'lucide-react';
+import { MorphIcon } from 'morphicons/react';
+import { ShieldCheck as ShieldCheckData, Globe as GlobeData, Cpu as CpuData } from 'lucide';
 
 interface HeaderProps {
   mode: 'live' | 'demo';
@@ -26,10 +28,19 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 w-full border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
         
-        {/* Left: Mode Switcher & System Telemetry */}
+        {/* Left: Mode Switcher & System Telemetry with MorphIcon */}
         <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-start min-w-0">
-          {/* Dual-Mode Selector: Demo Safe vs Live Web */}
+          
+          {/* Dual-Mode Selector with fluid MorphIcon physics */}
           <div className="flex items-center bg-zinc-900/90 border border-zinc-800 rounded-lg p-0.5 text-xs font-mono shadow-inner">
+            <div className="pl-2 pr-1 flex items-center justify-center text-[#ff4400]">
+              <MorphIcon 
+                icon={mode === 'demo' ? ShieldCheckData : GlobeData} 
+                size={14} 
+                spring="snappy" 
+                className="transition-colors" 
+              />
+            </div>
             <button
               onClick={() => onToggleMode('demo')}
               className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md transition-all duration-150 active:scale-95 ${
@@ -39,8 +50,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
               title="Guaranteed zero-lag cached snapshot execution for hackathon presentation"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="hidden md:inline">Safe Demo Mode</span>
+              <span className="hidden md:inline">Safe Demo</span>
               <span className="md:hidden">Demo</span>
             </button>
             <button
@@ -52,8 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
               title="Execute live HTTP scraping and LLM extraction against permitted sources"
             >
-              <Globe className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Live Web Agent</span>
+              <span className="hidden md:inline">Live Agent</span>
               <span className="md:hidden">Live</span>
             </button>
           </div>
@@ -69,7 +78,12 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex flex-col items-center justify-center shrink-0 mx-2 sm:mx-4 group cursor-pointer select-none text-center">
           <div className="flex items-center gap-2 sm:gap-2.5">
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 text-[#ff4400] group-hover:border-[#ff4400]/60 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(255,68,0,0.3)] transition-all duration-200">
-              <Cpu className="w-4.5 h-4.5 group-hover:rotate-6 transition-transform duration-200" />
+              <MorphIcon 
+                icon={CpuData} 
+                size={18} 
+                spring="bouncy" 
+                className="group-hover:rotate-6 transition-transform duration-200" 
+              />
             </div>
             <h1 className="font-brand text-2xl sm:text-3xl text-white group-hover:text-[#ff4400] transition-colors leading-none tracking-wide">
               Provenance

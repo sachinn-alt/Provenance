@@ -16,6 +16,7 @@ import { WorkflowRun, CellProvenance, GeneratedSchema } from '@/types';
 import { getInitialSeedWorkflow } from '@/lib/workflowStore';
 import { Table, BarChart2 } from 'lucide-react';
 import { LeftCaricatureRail, RightCaricatureRail } from '@/components/SideRails';
+import { Footer } from '@/components/Footer';
 
 const defaultInitialWorkflow = getInitialSeedWorkflow();
 
@@ -295,6 +296,14 @@ export default function Home() {
 
       </main>
       </div>
+
+      {/* Industrial Terminal Footer */}
+      <Footer
+        onOpenApi={() => setShowApiModal(true)}
+        onOpenHistory={() => setShowHistoryModal(true)}
+        mode={mode}
+        totalWorkflows={historyWorkflows.length}
+      />
 
       {/* Lineage & Citation Inspector Drawer */}
       <LineageDrawer
