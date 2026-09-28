@@ -101,7 +101,7 @@ export const Footer: React.FC<FooterProps> = ({
 
         </div>
 
-        {/* Center / Hero: Giant Iconic Typographic Wordmark with Geometric Triple-Arc Mark */}
+        {/* Center / Hero: Giant Iconic Typographic Wordmark with Geometric Triple-Arc Mark ')))' */}
         <div className="pt-4 pb-2 border-b border-zinc-900/60">
           <div className="flex items-center gap-4 sm:gap-6 md:gap-8 group">
             
@@ -113,7 +113,7 @@ export const Footer: React.FC<FooterProps> = ({
                 viewBox="0 0 28 80"
                 aria-hidden="true"
               >
-                <path d="M24 4 C10 24 10 56 24 76 C17 76 4 56 4 40 C4 24 17 4 24 4 Z" />
+                <path d="M4 4 C18 24 18 56 4 76 C11 76 24 56 24 40 C24 24 11 4 4 4 Z" />
               </svg>
 
               {/* Arc Blade 2 */}
@@ -122,7 +122,7 @@ export const Footer: React.FC<FooterProps> = ({
                 viewBox="0 0 28 80"
                 aria-hidden="true"
               >
-                <path d="M24 4 C10 24 10 56 24 76 C17 76 4 56 4 40 C4 24 17 4 24 4 Z" />
+                <path d="M4 4 C18 24 18 56 4 76 C11 76 24 56 24 40 C24 24 11 4 4 4 Z" />
               </svg>
 
               {/* Arc Blade 3 */}
@@ -131,7 +131,7 @@ export const Footer: React.FC<FooterProps> = ({
                 viewBox="0 0 28 80"
                 aria-hidden="true"
               >
-                <path d="M24 4 C10 24 10 56 24 76 C17 76 4 56 4 40 C4 24 17 4 24 4 Z" />
+                <path d="M4 4 C18 24 18 56 4 76 C11 76 24 56 24 40 C24 24 11 4 4 4 Z" />
               </svg>
             </div>
 
