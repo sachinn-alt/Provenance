@@ -3,7 +3,7 @@
 import React from 'react';
 import { History, Download, Terminal, Settings, GitCompare } from 'lucide-react';
 import { MorphIcon } from 'morphicons/react';
-import { ShieldCheck as ShieldCheckData, Globe as GlobeData, Cpu as CpuData } from 'lucide';
+import { ShieldCheck as ShieldCheckData, Globe as GlobeData } from 'lucide';
 
 interface HeaderProps {
   mode: 'live' | 'demo';
@@ -32,19 +32,42 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 w-full border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
-        {/* Left: Brand & Blinking Dot Status */}
-        <div className="flex items-center gap-3 group cursor-pointer select-none">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 text-[#ff4400] group-hover:border-[#ff4400]/60 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(255,68,0,0.3)] transition-all duration-200">
-            <MorphIcon 
-              icon={CpuData} 
-              size={20} 
-              spring="bouncy" 
-              className="group-hover:rotate-6 transition-transform duration-200" 
-            />
+        {/* Left: Brand with Triple-Arc Logo ')))' and Monumental Typography */}
+        <div className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer select-none">
+          {/* Triple-Arc Logo ')))' */}
+          <div 
+            className="flex items-center gap-0.5 sm:gap-1 shrink-0 text-[#ff4400] group-hover:scale-105 transition-transform duration-200" 
+            aria-label="Provenance Triple-Arc Logo"
+          >
+            {/* Arc Blade 1 */}
+            <svg 
+              className="h-6 sm:h-7 w-auto fill-current" 
+              viewBox="0 0 28 80" 
+              aria-hidden="true"
+            >
+              <path d="M4 4 C18 24 18 56 4 76 C11 76 24 56 24 40 C24 24 11 4 4 4 Z" />
+            </svg>
+            {/* Arc Blade 2 */}
+            <svg 
+              className="h-6 sm:h-7 w-auto fill-current" 
+              viewBox="0 0 28 80" 
+              aria-hidden="true"
+            >
+              <path d="M4 4 C18 24 18 56 4 76 C11 76 24 56 24 40 C24 24 11 4 4 4 Z" />
+            </svg>
+            {/* Arc Blade 3 */}
+            <svg 
+              className="h-6 sm:h-7 w-auto fill-current" 
+              viewBox="0 0 28 80" 
+              aria-hidden="true"
+            >
+              <path d="M4 4 C18 24 18 56 4 76 C11 76 24 56 24 40 C24 24 11 4 4 4 Z" />
+            </svg>
           </div>
+
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-brand text-2xl sm:text-[26px] text-white group-hover:text-[#ff4400] transition-colors leading-none tracking-wide">
+              <h1 className="font-sans font-black text-2xl sm:text-[25px] tracking-[-0.04em] text-white group-hover:text-zinc-200 transition-colors leading-none">
                 Provenance
               </h1>
               {/* Operational blinking dot only — no text */}
