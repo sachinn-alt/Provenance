@@ -94,6 +94,8 @@ export interface WorkflowRun {
   records: ExtractedRecord[];
   logs: WorkflowLog[];
   summary: WorkflowSummary;
+  documentContent?: string;
+  sourceUrl?: string;
 }
 
 export interface PromptPreset {
@@ -102,4 +104,36 @@ export interface PromptPreset {
   category: string;
   prompt: string;
   description: string;
+}
+
+export interface AppSettings {
+  llmProvider: 'gemini' | 'openai' | 'claude' | 'ollama' | 'groq';
+  apiKey?: string;
+  ollamaEndpoint?: string;
+  confidenceThreshold: number;
+  crawlerStrategy: 'auto' | 'jina' | 'cheerio';
+  autoVerifyHighConfidence: boolean;
+}
+
+export interface RecordDiff {
+  type: 'added' | 'removed' | 'modified' | 'unchanged';
+  primaryKey: string;
+  recordA?: ExtractedRecord;
+  recordB?: ExtractedRecord;
+  fieldChanges?: {
+    fieldName: string;
+    oldValue: any;
+    newValue: any;
+  }[];
+}
+
+export interface RunDiffSummary {
+  runAId: string;
+  runBId: string;
+  addedCount: number;
+  removedCount: number;
+  modifiedCount: number;
+  unchangedCount: number;
+  volatilityPercentage: number;
+  diffs: RecordDiff[];
 }

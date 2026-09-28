@@ -11,6 +11,8 @@ import { AnalyticsView } from '@/components/AnalyticsView';
 import { HistoryModal } from '@/components/HistoryModal';
 import { ExportModal } from '@/components/ExportModal';
 import { DeveloperApiModal } from '@/components/DeveloperApiModal';
+import { SettingsModal } from '@/components/SettingsModal';
+import { DiffViewerModal } from '@/components/DiffViewerModal';
 import { WorkflowRun, CellProvenance, GeneratedSchema } from '@/types';
 import { getInitialSeedWorkflow } from '@/lib/workflowStore';
 import { Table, BarChart2 } from 'lucide-react';
@@ -30,6 +32,8 @@ export default function Home() {
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
   const [showApiModal, setShowApiModal] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [showDiffModal, setShowDiffModal] = useState(false);
   const [inspectedCell, setInspectedCell] = useState<{
     fieldName: string;
     fieldValue: any;
@@ -151,6 +155,8 @@ export default function Home() {
         onOpenHistory={() => setShowHistoryModal(true)}
         onOpenExport={() => setShowExportModal(true)}
         onOpenApi={() => setShowApiModal(true)}
+        onOpenSettings={() => setShowSettingsModal(true)}
+        onOpenDiff={() => setShowDiffModal(true)}
         historyCount={historyWorkflows.length}
         hasRecords={Boolean(activeWorkflow && activeWorkflow.records.length > 0)}
       />
@@ -248,6 +254,8 @@ export default function Home() {
                 records={activeWorkflow.records}
                 schema={activeWorkflow.schema}
                 onInspectCell={handleInspectCell}
+                documentContent={activeWorkflow.documentContent}
+                sourceUrl={activeWorkflow.sourceUrl}
               />
             )}
 
@@ -306,6 +314,20 @@ export default function Home() {
       <DeveloperApiModal
         isOpen={showApiModal}
         onClose={() => setShowApiModal(false)}
+      />
+
+      {/* System Settings & BYOK Modal */}
+      <SettingsModal
+        isOpen={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+      />
+
+      {/* Change Detection & Continuous Run Diff Modal */}
+      <DiffViewerModal
+        isOpen={showDiffModal}
+        onClose={() => setShowDiffModal(false)}
+        workflows={historyWorkflows}
+        currentWorkflowId={activeWorkflow?.id}
       />
 
     </div>

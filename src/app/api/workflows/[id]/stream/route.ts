@@ -184,7 +184,9 @@ export async function GET(
           steps: currentSteps,
           records: cleanedRecords,
           logs,
-          summary
+          summary,
+          documentContent: harvested.markdownContent,
+          sourceUrl: primaryUrl
         };
 
         updateWorkflow(id, completedWorkflow);

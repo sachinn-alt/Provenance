@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { History, Download, Terminal } from 'lucide-react';
+import { History, Download, Terminal, Settings, GitCompare } from 'lucide-react';
 import { MorphIcon } from 'morphicons/react';
 import { ShieldCheck as ShieldCheckData, Globe as GlobeData, Cpu as CpuData } from 'lucide';
 
@@ -11,6 +11,8 @@ interface HeaderProps {
   onOpenHistory: () => void;
   onOpenExport: () => void;
   onOpenApi: () => void;
+  onOpenSettings?: () => void;
+  onOpenDiff?: () => void;
   historyCount: number;
   hasRecords: boolean;
 }
@@ -21,6 +23,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenHistory,
   onOpenExport,
   onOpenApi,
+  onOpenSettings,
+  onOpenDiff,
   historyCount,
   hasRecords
 }) => {
@@ -119,6 +123,18 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="hidden sm:inline">API</span>
           </button>
 
+          {/* Change Detection & Diff Engine Button */}
+          {onOpenDiff && historyCount > 1 && (
+            <button
+              onClick={onOpenDiff}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900/80 hover:border-zinc-700 text-zinc-300 text-xs font-mono transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 shadow-sm"
+              title="Compare runs & detect changed entities"
+            >
+              <GitCompare className="w-3.5 h-3.5 text-zinc-400" />
+              <span className="hidden md:inline">Diff</span>
+            </button>
+          )}
+
           {/* Export Button */}
           <button
             onClick={onOpenExport}
@@ -132,6 +148,17 @@ export const Header: React.FC<HeaderProps> = ({
             <Download className="w-3.5 h-3.5" />
             <span>Export</span>
           </button>
+
+          {/* Settings / BYOK Button */}
+          {onOpenSettings && (
+            <button
+              onClick={onOpenSettings}
+              className="p-2 rounded-lg border border-zinc-800 bg-zinc-900/80 hover:border-[#ff4400]/40 text-zinc-400 hover:text-[#ff4400] text-xs font-mono transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 shadow-sm"
+              title="Configure LLM providers, API keys, and crawler engine"
+            >
+              <Settings className="w-3.5 h-3.5" />
+            </button>
+          )}
 
         </div>
       </div>
