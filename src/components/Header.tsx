@@ -26,12 +26,42 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
-        {/* Left: Mode Switcher & System Telemetry with MorphIcon */}
-        <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-start min-w-0">
+        {/* Left: Brand & Blinking Dot Status */}
+        <div className="flex items-center gap-3 group cursor-pointer select-none">
+          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 text-[#ff4400] group-hover:border-[#ff4400]/60 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(255,68,0,0.3)] transition-all duration-200">
+            <MorphIcon 
+              icon={CpuData} 
+              size={20} 
+              spring="bouncy" 
+              className="group-hover:rotate-6 transition-transform duration-200" 
+            />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="font-brand text-2xl sm:text-[26px] text-white group-hover:text-[#ff4400] transition-colors leading-none tracking-wide">
+                Provenance
+              </h1>
+              {/* Operational blinking dot only — no text */}
+              <span 
+                className="flex items-center justify-center w-3 h-3 rounded-full bg-zinc-900 border border-zinc-800 transition-colors group-hover:border-zinc-700" 
+                title="Operational"
+                aria-label="Operational status indicator"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400] animate-pulse" />
+              </span>
+            </div>
+            <p className="text-[11px] font-mono text-zinc-500 hidden sm:block">
+              Autonomous Data Intelligence &amp; Lineage Machine
+            </p>
+          </div>
+        </div>
+
+        {/* Right: Mode Switcher & Navigation Actions */}
+        <div className="flex items-center gap-2 sm:gap-3">
           
-          {/* Dual-Mode Selector with fluid MorphIcon physics */}
+          {/* Dual-Mode Selector with MorphIcon physics */}
           <div className="flex items-center bg-zinc-900/90 border border-zinc-800 rounded-lg p-0.5 text-xs font-mono shadow-inner">
             <div className="pl-2 pr-1 flex items-center justify-center text-[#ff4400]">
               <MorphIcon 
@@ -50,7 +80,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
               title="Guaranteed zero-lag cached snapshot execution for hackathon presentation"
             >
-              <span className="hidden md:inline">Safe Demo</span>
+              <span className="hidden md:inline">Safe Demo Mode</span>
               <span className="md:hidden">Demo</span>
             </button>
             <button
@@ -62,45 +92,11 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
               title="Execute live HTTP scraping and LLM extraction against permitted sources"
             >
-              <span className="hidden md:inline">Live Agent</span>
+              <span className="hidden md:inline">Live Web Agent</span>
               <span className="md:hidden">Live</span>
             </button>
           </div>
 
-          {/* Operational Status Pill */}
-          <div className="hidden xl:flex items-center gap-1.5 px-2 py-1 rounded-md bg-zinc-900/70 border border-zinc-800 text-[10px] font-mono text-zinc-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400] animate-pulse"></span>
-            <span>SYSTEM READY</span>
-          </div>
-        </div>
-
-        {/* Center: Brand "Provenance" Hero */}
-        <div className="flex flex-col items-center justify-center shrink-0 mx-2 sm:mx-4 group cursor-pointer select-none text-center">
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 text-[#ff4400] group-hover:border-[#ff4400]/60 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(255,68,0,0.3)] transition-all duration-200">
-              <MorphIcon 
-                icon={CpuData} 
-                size={18} 
-                spring="bouncy" 
-                className="group-hover:rotate-6 transition-transform duration-200" 
-              />
-            </div>
-            <h1 className="font-brand text-2xl sm:text-3xl text-white group-hover:text-[#ff4400] transition-colors leading-none tracking-wide">
-              Provenance
-            </h1>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800 hidden sm:flex items-center gap-1.5 transition-colors group-hover:border-zinc-700">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400] animate-pulse"></span>
-              Operational
-            </span>
-          </div>
-          <p className="text-[10px] font-mono text-zinc-500 hidden md:block tracking-tight pt-1">
-            Autonomous Data Intelligence &amp; Lineage Machine
-          </p>
-        </div>
-
-        {/* Right: Actions (Runs, API, Export) */}
-        <div className="flex items-center gap-2 sm:gap-2.5 flex-1 justify-end min-w-0">
-          
           {/* History Button */}
           <button
             onClick={onOpenHistory}
