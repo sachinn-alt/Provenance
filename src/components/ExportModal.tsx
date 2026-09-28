@@ -100,9 +100,9 @@ export const ExportModal: React.FC<ExportModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 overflow-hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
       <div 
-        className="w-full max-w-xl bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl flex flex-col overflow-hidden"
+        className="w-full max-w-xl bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl flex flex-col overflow-hidden animate-modal-pop"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -121,7 +121,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
+            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 hover:rotate-90 active:scale-90 transition-all duration-200"
           >
             <X className="w-4 h-4" />
           </button>
@@ -136,7 +136,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
             return (
               <div
                 key={fmt.id}
-                className="p-3.5 rounded-lg border border-zinc-800 bg-zinc-900/40 flex items-center justify-between gap-3 hover:border-zinc-700 transition-colors"
+                className="p-3.5 rounded-lg border border-zinc-800 bg-zinc-900/40 flex items-center justify-between gap-3 hover:border-zinc-700 hover:-translate-y-0.5 transition-all duration-150 select-none shadow-sm"
               >
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-zinc-800/80 border border-zinc-700/60 flex items-center justify-center text-zinc-300 mt-0.5">
@@ -151,15 +151,15 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={() => handleCopy(fmt.getter(), fmt.id)}
-                    className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors"
+                    className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white active:scale-90 transition-all duration-150"
                     title="Copy to clipboard"
                   >
-                    {isCopied ? <Check className="w-3.5 h-3.5 text-[#ff4400]" /> : <Copy className="w-3.5 h-3.5" />}
+                    {isCopied ? <Check className="w-3.5 h-3.5 text-[#ff4400] animate-badge-pop" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
 
                   <button
                     onClick={() => downloadFile(fmt.getter(), `${entitySlug}-${Date.now()}${fmt.ext}`, fmt.mime)}
-                    className="px-3 py-1.5 rounded-lg bg-[#ff4400] hover:bg-[#ff5511] active:scale-95 text-black text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-[#ff4400]/20"
+                    className="px-3 py-1.5 rounded-lg bg-[#ff4400] hover:bg-[#ff5511] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 text-black text-xs font-bold flex items-center gap-1.5 transition-all duration-150 shadow-md shadow-[#ff4400]/20"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>Download</span>
@@ -174,7 +174,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
         <div className="p-4 border-t border-zinc-800 bg-zinc-900/40 flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-300 transition-colors"
+            className="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-300 active:scale-95 transition-all duration-150"
           >
             Close
           </button>

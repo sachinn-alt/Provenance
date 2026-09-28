@@ -19,8 +19,21 @@ body {
   font-family: var(--font-display), sans-serif;
 }
 
+.font-brand {
+  font-family: var(--font-brand), 'Handflair', cursive, sans-serif;
+}
+
 .font-mono, .font-mono-code {
   font-family: var(--font-mono), ui-monospace, Menlo, Consolas, monospace;
+}
+
+@font-face {
+  font-family: 'Handflair';
+  src: url('/fonts/Handflair.otf') format('opentype'),
+       url('/fonts/Handflair.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Custom High-Density Industrial Scrollbars */
@@ -40,4 +53,101 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #ff4400;
+}
+
+/* GPU-Accelerated Micro-Animation Utilities */
+@keyframes modal-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes drawer-slide-right {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes badge-pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes subtle-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px -3px rgba(255, 68, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 25px -1px rgba(255, 68, 0, 0.45);
+  }
+}
+
+.animate-modal-pop {
+  animation: modal-pop 160ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-drawer-slide {
+  animation: drawer-slide-right 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-badge-pop {
+  animation: badge-pop 220ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-subtle-glow {
+  animation: subtle-glow 3s ease-in-out infinite;
+}
+
+/* Interactive Micro-Interactions */
+.interactive-hover-lift {
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease, border-color 160ms ease;
+  will-change: transform;
+}
+.interactive-hover-lift:hover {
+  transform: translateY(-2px);
+}
+.interactive-hover-lift:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.interactive-button {
+  transition: transform 120ms ease, background-color 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  will-change: transform;
+}
+.interactive-button:hover {
+  transform: translateY(-1px);
+}
+.interactive-button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Respect user accessibility settings */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

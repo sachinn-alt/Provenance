@@ -118,7 +118,7 @@ runAutonomousProvenance();`;
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-8"
+        className="w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-8 animate-modal-pop"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -142,7 +142,7 @@ runAutonomousProvenance();`;
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
+            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 hover:rotate-90 active:scale-90 transition-all duration-200"
           >
             <X className="w-5 h-5" />
           </button>
@@ -153,7 +153,7 @@ runAutonomousProvenance();`;
           <div className="flex items-center gap-1 font-mono text-xs">
             <button
               onClick={() => setActiveTab('curl')}
-              className={`px-3 py-1.5 rounded-md font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-md font-medium transition-all duration-150 active:scale-95 ${
                 activeTab === 'curl' 
                   ? 'bg-zinc-800 text-white border border-zinc-700 shadow-sm' 
                   : 'text-zinc-500 hover:text-zinc-300'
@@ -163,7 +163,7 @@ runAutonomousProvenance();`;
             </button>
             <button
               onClick={() => setActiveTab('python')}
-              className={`px-3 py-1.5 rounded-md font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-md font-medium transition-all duration-150 active:scale-95 ${
                 activeTab === 'python' 
                   ? 'bg-zinc-800 text-white border border-zinc-700 shadow-sm' 
                   : 'text-zinc-500 hover:text-zinc-300'

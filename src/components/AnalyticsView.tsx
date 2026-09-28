@@ -32,10 +32,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         
         {/* KPI 1: Records Harvested */}
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-950/60 group select-none">
           <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono tracking-wider">
             <span>ENTITIES</span>
-            <Database className="w-3.5 h-3.5 text-zinc-400" />
+            <Database className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-200 group-hover:scale-110 transition-all duration-200" />
           </div>
           <div className="mt-2">
             <span className="text-2xl font-bold font-mono text-zinc-100">{summary.totalExtracted}</span>
@@ -44,10 +44,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
 
         {/* KPI 2: Validity Rate */}
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-950/60 group select-none">
           <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono tracking-wider">
             <span>VALIDITY</span>
-            <ShieldCheck className="w-3.5 h-3.5 text-[#ff4400]" />
+            <ShieldCheck className="w-3.5 h-3.5 text-[#ff4400] group-hover:scale-110 transition-all duration-200" />
           </div>
           <div className="mt-2">
             <span className="text-2xl font-bold font-mono text-zinc-100">{summary.validRate}%</span>
@@ -56,10 +56,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
 
         {/* KPI 3: Citation Confidence */}
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-950/60 group select-none">
           <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono tracking-wider">
             <span>CONFIDENCE</span>
-            <Award className="w-3.5 h-3.5 text-[#ff4400]" />
+            <Award className="w-3.5 h-3.5 text-[#ff4400] group-hover:scale-110 transition-all duration-200" />
           </div>
           <div className="mt-2">
             <span className="text-2xl font-bold font-mono text-[#ff4400]">{summary.avgConfidence}%</span>
@@ -68,10 +68,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
 
         {/* KPI 4: Sources Consulted */}
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-950/60 group select-none">
           <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono tracking-wider">
             <span>SOURCES</span>
-            <Globe className="w-3.5 h-3.5 text-zinc-400" />
+            <Globe className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-200 group-hover:scale-110 transition-all duration-200" />
           </div>
           <div className="mt-2">
             <span className="text-2xl font-bold font-mono text-zinc-100">{summary.sourcesCount}</span>
@@ -80,10 +80,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
 
         {/* KPI 5: Deduplication Efficiency */}
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-950/60 group select-none">
           <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono tracking-wider">
             <span>DEDUP MERGES</span>
-            <GitMerge className="w-3.5 h-3.5 text-zinc-400" />
+            <GitMerge className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-200 group-hover:scale-110 transition-all duration-200" />
           </div>
           <div className="mt-2">
             <span className="text-2xl font-bold font-mono text-zinc-100">{summary.dedupCount}</span>
@@ -92,10 +92,10 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
 
         {/* KPI 6: Execution Latency */}
-        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-950/60 group select-none">
           <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono tracking-wider">
             <span>LATENCY</span>
-            <Clock className="w-3.5 h-3.5 text-zinc-400" />
+            <Clock className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-200 group-hover:scale-110 transition-all duration-200" />
           </div>
           <div className="mt-2">
             <span className="text-2xl font-bold font-mono text-zinc-100">
@@ -130,7 +130,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
                   </div>
                   <div className="w-full h-1.5 rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden">
                     <div
-                      className="h-full bg-[#ff4400] rounded-full transition-all"
+                      className="h-full bg-[#ff4400] rounded-full transition-all duration-700 ease-out"
                       style={{ width: `${pct}%` }}
                     />
                   </div>

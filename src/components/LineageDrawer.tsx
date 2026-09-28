@@ -38,11 +38,11 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-sm flex justify-end transition-opacity"
+      className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-sm flex justify-end transition-opacity animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-lg bg-zinc-950 border-l border-zinc-800 shadow-2xl flex flex-col h-full transform transition-transform animate-in slide-in-from-right duration-200"
+        className="w-full max-w-lg bg-zinc-950 border-l border-zinc-800 shadow-2xl flex flex-col h-full transform transition-transform animate-drawer-slide"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -63,7 +63,7 @@ export const LineageDrawer: React.FC<LineageDrawerProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
+            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 hover:rotate-90 active:scale-90 transition-all duration-200"
           >
             <X className="w-4 h-4" />
           </button>

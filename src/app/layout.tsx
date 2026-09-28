@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Syne, Space_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -18,6 +19,12 @@ const spaceMono = Space_Mono({
   weight: ['400', '700'],
   subsets: ['latin'],
   variable: '--font-mono',
+  display: 'swap',
+});
+
+const handflair = localFont({
+  src: '../fonts/Handflair.otf',
+  variable: '--font-brand',
   display: 'swap',
 });
 
@@ -84,7 +91,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${spaceGrotesk.variable} ${syne.variable} ${spaceMono.variable} min-h-full flex flex-col bg-[#050505] text-zinc-100 font-sans selection:bg-[#ff4400] selection:text-white`}>
+      <body className={`${spaceGrotesk.variable} ${syne.variable} ${spaceMono.variable} ${handflair.variable} min-h-full flex flex-col bg-[#050505] text-zinc-100 font-sans selection:bg-[#ff4400] selection:text-white`}>
         {children}
       </body>
     </html>

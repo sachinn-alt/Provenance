@@ -54,9 +54,9 @@ export const ExecutionConsole: React.FC<ExecutionConsoleProps> = ({
               <button
                 key={lvl}
                 onClick={() => setFilterLevel(lvl)}
-                className={`px-2 py-0.5 rounded uppercase transition-colors ${
+                className={`px-2 py-0.5 rounded uppercase transition-all duration-150 active:scale-95 ${
                   filterLevel === lvl
-                    ? 'bg-zinc-800 text-[#ff4400] font-bold'
+                    ? 'bg-zinc-800 text-[#ff4400] font-bold shadow-sm'
                     : 'text-zinc-500 hover:text-zinc-300'
                 }`}
               >
@@ -68,9 +68,10 @@ export const ExecutionConsole: React.FC<ExecutionConsoleProps> = ({
           {/* Toggle Accordion */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1 rounded text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+            className="p-1 rounded text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-all duration-150 active:scale-90"
+            title={isOpen ? "Collapse console" : "Expand console"}
           >
-            {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
           </button>
         </div>
       </div>
@@ -95,12 +96,12 @@ export const ExecutionConsole: React.FC<ExecutionConsoleProps> = ({
               if (log.level === 'error') badgeColor = 'bg-white text-black border-white font-bold';
 
               return (
-                <div key={log.id} className="flex items-start gap-2 leading-relaxed text-zinc-300 hover:bg-zinc-900/40 px-1 py-0.5 rounded transition-colors">
-                  <span className="text-zinc-600 shrink-0 select-none" suppressHydrationWarning>{timeStr}</span>
+                <div key={log.id} className="flex items-start gap-2 leading-relaxed text-zinc-300 hover:bg-zinc-900/60 hover:translate-x-0.5 px-1 py-0.5 rounded transition-all duration-100 group">
+                  <span className="text-zinc-600 shrink-0 select-none group-hover:text-zinc-400 transition-colors" suppressHydrationWarning>{timeStr}</span>
                   <span className={`text-[9px] uppercase px-1.5 py-0.2 rounded border font-semibold shrink-0 ${badgeColor}`}>
                     {log.phase}
                   </span>
-                  <span className="break-all">{log.message}</span>
+                  <span className="break-all group-hover:text-zinc-100 transition-colors">{log.message}</span>
                 </div>
               );
             })

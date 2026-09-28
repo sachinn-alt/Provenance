@@ -162,7 +162,7 @@ export const DagInspectorModal: React.FC<DagInspectorModalProps> = ({ step, onCl
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-8"
+        className="w-full max-w-2xl bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col my-8 animate-modal-pop"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -188,7 +188,7 @@ export const DagInspectorModal: React.FC<DagInspectorModalProps> = ({ step, onCl
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors"
+            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 hover:rotate-90 active:scale-90 transition-all duration-200"
           >
             <X className="w-5 h-5" />
           </button>

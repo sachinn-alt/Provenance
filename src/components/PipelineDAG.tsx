@@ -70,29 +70,29 @@ export const PipelineDAG: React.FC<PipelineDAGProps> = ({ steps, isRunning }) =>
             <div
               key={step.id}
               onClick={() => setSelectedStep(step)}
-              className={`relative flex flex-col justify-between p-3 rounded-lg border transition-all cursor-pointer group hover:scale-[1.02] ${
+              className={`relative flex flex-col justify-between p-3 rounded-lg border transition-all duration-200 cursor-pointer group hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] select-none ${
                 isCompleted
-                  ? 'bg-zinc-900/80 border-zinc-700/80 hover:border-zinc-500 text-zinc-100 shadow-sm'
+                  ? 'bg-zinc-900/80 border-zinc-700/80 hover:border-zinc-500 text-zinc-100 shadow-sm hover:shadow-lg hover:shadow-zinc-900/50'
                   : isInProgress
-                  ? 'bg-zinc-900 border-[#ff4400] shadow-lg shadow-[#ff4400]/15 ring-1 ring-[#ff4400]/40'
+                  ? 'bg-zinc-900 border-[#ff4400] shadow-lg shadow-[#ff4400]/20 ring-1 ring-[#ff4400]/50 animate-subtle-glow'
                   : isFailed
                   ? 'bg-rose-950/20 border-rose-500/60 text-rose-300'
-                  : 'bg-zinc-900/30 border-zinc-800/60 hover:border-zinc-700 text-zinc-500'
+                  : 'bg-zinc-900/30 border-zinc-800/60 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-500'
               }`}
               title="Click to inspect Agent Architecture & Mathematical Guardrails"
             >
               {/* Header: Stage Number & Status Icon */}
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800/80 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800/80 text-zinc-400 group-hover:text-zinc-200 group-hover:bg-zinc-800 transition-colors">
                   0{idx + 1}
                 </span>
 
-                <div>
-                  {isCompleted && <CheckCircle2 className="w-4 h-4 text-zinc-200" />}
+                <div className="transition-transform duration-200 group-hover:scale-110">
+                  {isCompleted && <CheckCircle2 className="w-4 h-4 text-zinc-200 animate-badge-pop" />}
                   {isInProgress && <Loader2 className="w-4 h-4 text-[#ff4400] animate-spin" />}
                   {isFailed && <AlertCircle className="w-4 h-4 text-rose-400" />}
                   {!isCompleted && !isInProgress && !isFailed && (
-                    <Circle className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-500" />
+                    <Circle className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-500 transition-colors" />
                   )}
                 </div>
               </div>
