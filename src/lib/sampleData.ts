@@ -28,6 +28,13 @@ export const PROMPT_PRESETS: PromptPreset[] = [
     category: 'Market Intelligence',
     prompt: 'Extract pricing tiers and developer quotas for top AI API platforms with starter price, monthly free tier limit, and overage rates.',
     description: 'Compare developer platform unit economics and monetization models.'
+  },
+  {
+    id: 'live-hn-crawler',
+    title: 'Live Hacker News Intel',
+    category: 'Live Web Scraping',
+    prompt: 'Crawl live stories from https://news.ycombinator.com with headline title, story url, points, and author.',
+    description: 'Real-time Jina Reader live web extraction of Y-Combinator front page.'
   }
 ];
 

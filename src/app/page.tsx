@@ -15,6 +15,7 @@ import { WorkflowRun, CellProvenance, GeneratedSchema } from '@/types';
 import { getInitialSeedWorkflow } from '@/lib/workflowStore';
 import { Table, BarChart2 } from 'lucide-react';
 import { Footer } from '@/components/Footer';
+import { DigitalMetalBackdrop } from '@/components/DigitalMetalBackdrop';
 
 const defaultInitialWorkflow = getInitialSeedWorkflow();
 
@@ -140,8 +141,8 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#050505] relative overflow-x-hidden selection:bg-[#ff4400] selection:text-white">
       
-      {/* Subtle Technical Grid Overlay */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:24px_24px] opacity-20 z-0" />
+      {/* Digital Metal Unified Specular Horizon & Monolith Architectural Backdrop */}
+      <DigitalMetalBackdrop />
 
       {/* Header */}
       <Header

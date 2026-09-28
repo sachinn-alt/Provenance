@@ -16,7 +16,7 @@ export const Footer: React.FC<FooterProps> = ({
   totalWorkflows = 1
 }) => {
   return (
-    <footer className="w-full bg-[#050505] text-white border-t border-zinc-900 relative overflow-hidden select-none font-sans pt-16 pb-8 md:pt-24 md:pb-12 mt-16">
+    <footer className="w-full bg-[#050505]/60 backdrop-blur-[2px] text-white border-t border-zinc-900/60 relative overflow-hidden select-none font-sans pt-16 pb-8 md:pt-24 md:pb-12 mt-16">
       
       {/* Architectural Monolith Grid Backdrop with Specular Horizon Light */}
       <div 
