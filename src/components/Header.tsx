@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Database, ShieldCheck, Globe, History, Download, Terminal, Cpu } from 'lucide-react';
+import { ShieldCheck, Globe, History, Download, Terminal, Cpu } from 'lucide-react';
 
 interface HeaderProps {
   mode: 'live' | 'demo';
@@ -24,30 +24,10 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
         
-        {/* Left: Brand & Status */}
-        <div className="flex items-center gap-3 group cursor-pointer select-none">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 text-[#ff4400] group-hover:border-[#ff4400]/60 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(255,68,0,0.3)] transition-all duration-200">
-            <Cpu className="w-5 h-5 group-hover:rotate-6 transition-transform duration-200" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2.5">
-              <h1 className="font-brand text-2xl sm:text-[26px] text-white group-hover:text-[#ff4400] transition-colors leading-none tracking-wide">
-                Provenance
-              </h1>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800 flex items-center gap-1.5 transition-colors group-hover:border-zinc-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400] animate-pulse"></span>
-                Operational
-              </span>
-            </div>
-            <p className="text-[11px] font-mono text-zinc-500 hidden sm:block">Autonomous Data Intelligence & Lineage Machine</p>
-          </div>
-        </div>
-
-        {/* Right: Mode Switcher & Navigation Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          
+        {/* Left: Mode Switcher & System Telemetry */}
+        <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-start min-w-0">
           {/* Dual-Mode Selector: Demo Safe vs Live Web */}
           <div className="flex items-center bg-zinc-900/90 border border-zinc-800 rounded-lg p-0.5 text-xs font-mono shadow-inner">
             <button
@@ -78,6 +58,35 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
 
+          {/* Operational Status Pill */}
+          <div className="hidden xl:flex items-center gap-1.5 px-2 py-1 rounded-md bg-zinc-900/70 border border-zinc-800 text-[10px] font-mono text-zinc-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400] animate-pulse"></span>
+            <span>SYSTEM READY</span>
+          </div>
+        </div>
+
+        {/* Center: Brand "Provenance" Hero */}
+        <div className="flex flex-col items-center justify-center shrink-0 mx-2 sm:mx-4 group cursor-pointer select-none text-center">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 text-[#ff4400] group-hover:border-[#ff4400]/60 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(255,68,0,0.3)] transition-all duration-200">
+              <Cpu className="w-4.5 h-4.5 group-hover:rotate-6 transition-transform duration-200" />
+            </div>
+            <h1 className="font-brand text-2xl sm:text-3xl text-white group-hover:text-[#ff4400] transition-colors leading-none tracking-wide">
+              Provenance
+            </h1>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800 hidden sm:flex items-center gap-1.5 transition-colors group-hover:border-zinc-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff4400] animate-pulse"></span>
+              Operational
+            </span>
+          </div>
+          <p className="text-[10px] font-mono text-zinc-500 hidden md:block tracking-tight pt-1">
+            Autonomous Data Intelligence &amp; Lineage Machine
+          </p>
+        </div>
+
+        {/* Right: Actions (Runs, API, Export) */}
+        <div className="flex items-center gap-2 sm:gap-2.5 flex-1 justify-end min-w-0">
+          
           {/* History Button */}
           <button
             onClick={onOpenHistory}
