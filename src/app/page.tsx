@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Header } from '@/components/Header';
 import { PromptBar } from '@/components/PromptBar';
 import { PipelineDAG } from '@/components/PipelineDAG';
@@ -13,7 +14,8 @@ import { ExportModal } from '@/components/ExportModal';
 import { DeveloperApiModal } from '@/components/DeveloperApiModal';
 import { WorkflowRun, CellProvenance, GeneratedSchema } from '@/types';
 import { getInitialSeedWorkflow } from '@/lib/workflowStore';
-import { Table, BarChart2, Sparkles, AlertCircle } from 'lucide-react';
+import { Table, BarChart2 } from 'lucide-react';
+import { LeftCaricatureRail, RightCaricatureRail } from '@/components/SideRails';
 
 const defaultInitialWorkflow = getInitialSeedWorkflow();
 
@@ -139,15 +141,20 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#050505] relative overflow-x-hidden selection:bg-[#ff4400] selection:text-white">
       
-      {/* Ambient Hand-Drawn Caricature Watermark (Teenage Engineering Style) */}
+      {/* Ambient Hand-Drawn Caricature Watermark in Vivid Orange (Teenage Engineering Style) */}
       <div 
-        className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden opacity-[0.05] select-none"
+        className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden opacity-30 select-none"
         aria-hidden="true"
       >
-        <img 
-          src="/images/caricature_manual_etl.jpg" 
-          alt="" 
-          className="w-full max-w-5xl object-contain invert mix-blend-screen scale-110 filter contrast-200"
+        {/* Ambient Radial Orange Glow */}
+        <div className="absolute w-[800px] h-[500px] rounded-full bg-[#ff4400]/15 blur-[140px] pointer-events-none" />
+        <Image 
+          src="/images/caricature_bg_orange.jpg" 
+          alt="Provenance Editorial Caricature" 
+          width={1280}
+          height={720}
+          priority
+          className="w-full max-w-6xl object-contain mix-blend-screen scale-105 filter contrast-125 brightness-110 drop-shadow-[0_0_40px_rgba(255,68,0,0.35)]"
         />
       </div>
 
@@ -165,8 +172,21 @@ export default function Home() {
         hasRecords={Boolean(activeWorkflow && activeWorkflow.records.length > 0)}
       />
 
-      {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5 relative z-10">
+      {/* Main Container Flanked by Thematic Left & Right Caricature Rails */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Left Flank: Caricature Web Harvester Rail */}
+        <LeftCaricatureRail isRunning={isRunning} />
+
+        {/* Right Flank: Caricature Intelligence & Lineage Rail */}
+        <RightCaricatureRail 
+          isRunning={isRunning} 
+          hasRecords={Boolean(activeWorkflow && activeWorkflow.records.length > 0)}
+          totalRecords={activeWorkflow?.records.length || 0}
+        />
+
+        {/* Main Central Dashboard */}
+        <main className="flex-1 w-full py-5 space-y-5 relative z-10">
         
         {/* Teenage Engineering Style Editorial Header Teaser */}
         <div className="flex items-center justify-between px-3.5 py-1.5 rounded-lg border border-zinc-800/80 bg-zinc-950/80 text-xs font-mono">
@@ -274,6 +294,7 @@ export default function Home() {
         )}
 
       </main>
+      </div>
 
       {/* Lineage & Citation Inspector Drawer */}
       <LineageDrawer
